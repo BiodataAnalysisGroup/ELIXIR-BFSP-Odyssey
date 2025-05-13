@@ -7,9 +7,9 @@
 textServer3(id, df)
 }
 \arguments{
-\item{id}{}
+\item{id}{numeric identifier}
 
-\item{df}{}
+\item{df}{data table}
 }
 \description{
 Title

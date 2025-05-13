@@ -7,7 +7,7 @@
 datasetServer(id)
 }
 \arguments{
-\item{id}{}
+\item{id}{numeric identifier}
 }
 \description{
 Title
