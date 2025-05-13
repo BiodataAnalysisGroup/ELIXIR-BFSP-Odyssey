@@ -7,7 +7,7 @@
 run_odyssey(...)
 }
 \arguments{
-\item{...}{}
+\item{...}{parameters}
 }
 \description{
 Title
