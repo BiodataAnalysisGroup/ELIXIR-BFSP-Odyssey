@@ -21,7 +21,7 @@ run_odyssey <- function(...) {
 
         title = tagList(
             h3(
-                "Exploring Molecular Biodiversity in Greece",
+                "Exploring Molecular Biodiversity",
                 style = "color: #F3F6FA; margin-bottom: 1px; margin-top: 1px;
                   white-space: nowrap;"
             ),
