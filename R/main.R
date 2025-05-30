@@ -268,13 +268,3 @@ run_odyssey <- function(...) {
     suppressWarnings(shinyApp(ui, server))
 
 }
-
-
-utils::globalVariables(c(
-    ".", "year_month", "Dates", 
-    "Number_of_isolation_source", 
-    "Number_of_names", 
-    "Number_of_taxes",
-    "color", "isolation_source", "lat", "long", 
-    "scientific_name", "tax_division2"
-))
