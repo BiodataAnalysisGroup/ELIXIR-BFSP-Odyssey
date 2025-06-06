@@ -39,7 +39,7 @@ tableOptions   <- function(id) {
 
         dateRangeInput(
             NS(id, "range"), "Dates of interest:",
-            start = Sys.Date() - months(6), end = Sys.Date(),
+            start = Sys.Date() - months(12), end = Sys.Date(), # changed to 12 months
             max =  Sys.Date()
         )
 
