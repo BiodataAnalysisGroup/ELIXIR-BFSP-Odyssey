@@ -1,9 +1,7 @@
 
-library(shiny)
-
 #' Title
 #'
-#' @param ...
+#' @param ... parameters
 #'
 #' @export
 #'
@@ -267,9 +265,16 @@ run_odyssey <- function(...) {
 
     }
 
-    shinyApp(ui, server)
+    suppressWarnings(shinyApp(ui, server))
 
 }
 
 
-
+utils::globalVariables(c(
+    ".", "year_month", "Dates", 
+    "Number_of_isolation_source", 
+    "Number_of_names", 
+    "Number_of_taxes",
+    "color", "isolation_source", "lat", "long", 
+    "scientific_name", "tax_division2"
+))
