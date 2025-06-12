@@ -1,11 +1,39 @@
 # Contributing to `Odyssey`
 
-This outlines how to propose a change to `Odyssey`. For more detailed info about contributing to this, and other tidyverse packages, please see the [**development contributing guide**](https://rstd.io/tidy-contrib). 
+Hi there! Many thanks for taking an interest in improving `Odyssey`. This document outlines how to propose any changes to `Odyssey`.
+
+## Contribution workflow
+
+### GitHub issues
+
+#### What kind of issues can somebody open?
+
+- If you encounter a bug in the app, please open an issue using the Bug Report template.
+- For new feature suggestions (i.e., suggestions for improving the app, ??), use the Feature Request template.
+- For all other matters, feel free to open an issue using the Blank template.
+
+Once the issue is created, you can assign a reviewer yourself or leave it unassigned — a team member will review it and take it from there.
+
+### Code contribution
+
+If you'd like to write some code for `Odyssey`, the standard workflow is as follows:
+
+1. Check that there isn't already an issue about your idea in the `Odyssey` issues to avoid duplicating work. If there isn't one already, please create one so that others know you're working on this.
+2. Fork the `Odyssey` main repository to your GitHub account
+3. Make the necessary changes / additions within your forked repository.
+4. Submit a Pull Request against the dev branch and wait for the code to be reviewed and merged.
+
+If you're not used to this workflow with git, you can start with some docs from GitHub or even their excellent git resources.
 
 ## Resources
 
+Below you can find relevant resources.
+
+*SPLIT ITEMS PER GROUP*
+
 - [R Packages (2e)](https://r-pkgs.org/)
 - [Mastering Shiny](https://mastering-shiny.org/)
+- [Modularizing Shiny app code](https://shiny.posit.co/r/articles/improve/modules/)
 
 ## Fixing typos
 
@@ -18,10 +46,11 @@ You can fix typos, spelling mistakes, or grammatical errors in the documentation
 
 ### Pull request process
 
-- Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("batpigandme/tidyverse", fork = TRUE)`.
+- Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey", fork = TRUE)`.
 - Install all development dependences with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`. If R CMD check doesn't pass cleanly, it's a good idea to ask for help before continuing. 
 - Create a Git branch for your pull request (PR). We recommend using `usethis::pr_init("brief-description-of-change")`.
-- Make your changes, commit to git, and then create a PR by running `usethis::pr_push()`, and following the prompts in your browser. The title of your PR should briefly describe the change. The body of your PR should contain `Fixes #issue-number`.
+- Make your changes and run `run_odyssey()` in order to see them.
+- Once your ready, commit to git, and then create a PR by running `usethis::pr_push()`, and following the prompts in your browser. The title of your PR should briefly describe the change. The body of your PR should contain `Fixes #issue-number`.
 - For user-facing changes, add a bullet to the top of `NEWS.md` (i.e. just below the first header). Follow the style described in <https://style.tidyverse.org/news.html>.
 
 ### Code style

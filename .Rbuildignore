@@ -4,3 +4,8 @@
 ^\.github
 ^\.github$
 ^CODE_OF_CONDUCT\.md$
+^CONTRIBUTING\.md$
+^NEWS\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

@@ -1,9 +1,14 @@
 Package: Odyssey
-Title: What the Package Does (One Line, Title Case)
+Title: Interactive Data Discovery Tool for Exploring Biodiversity Data
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: c(
+    person("Nikos", "Pechlivanis", , "nikosp41@certh.gr", role = "cre"),
+    person("Natasa", "Anastasiadou", , "nanastasiadou@certh.gr", role = "aut")
+     )
+Description: Odyssey is an interactive Shiny application designed as a data discovery tool 
+             for exploring biodiversity.It provides dynamic visualizations, 
+             interactive tables, and geospatial representations to help users
+             navigate and interpret molecular biodiversity data.
 License: MIT + file LICENSE
 Imports: 
     bslib,
@@ -11,7 +16,6 @@ Imports:
     echarts4r,
     htmltools,
     leaflet,
-    lubridate,
     reactable,
     scales,
     shiny,
@@ -19,3 +23,7 @@ Imports:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends: R (>= 4.1)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

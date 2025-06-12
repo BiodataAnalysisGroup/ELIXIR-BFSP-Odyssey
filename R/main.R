@@ -19,7 +19,7 @@ run_odyssey <- function(...) {
 
         title = tagList(
             h3(
-                "Exploring Molecular Biodiversity in Greece",
+                "Exploring Molecular Biodiversity",
                 style = "color: #F3F6FA; margin-bottom: 1px; margin-top: 1px;
                   white-space: nowrap;"
             ),
@@ -57,7 +57,7 @@ run_odyssey <- function(...) {
         sidebar = sidebar(
             sourceInput("source"),
             hr(),
-
+            
             tableOptions("table1"),
             hr(),
 
@@ -268,13 +268,3 @@ run_odyssey <- function(...) {
     suppressWarnings(shinyApp(ui, server))
 
 }
-
-
-utils::globalVariables(c(
-    ".", "year_month", "Dates", 
-    "Number_of_isolation_source", 
-    "Number_of_names", 
-    "Number_of_taxes",
-    "color", "isolation_source", "lat", "long", 
-    "scientific_name", "tax_division2"
-))
