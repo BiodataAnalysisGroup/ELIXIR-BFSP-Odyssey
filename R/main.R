@@ -265,6 +265,6 @@ run_odyssey <- function(...) {
 
     }
 
-    suppressWarnings(shinyApp(ui, server))
+    suppressWarnings(shinyApp(ui, server, options = list(host = "0.0.0.0", port = 3838)))
 
 }
