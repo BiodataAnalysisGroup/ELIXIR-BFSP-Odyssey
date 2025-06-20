@@ -1,5 +1,5 @@
 <tool id="interactive_tool_odyssey" tool_type="interactive" name="Odyssey" version="1.0.0" profile="23.1">
-    <description>Explore microbiome profiles</description>
+    <description>Run the Odyssey App</description>
     <requirements>
         <!-- <container type="docker">quay.io/TODO:0.1</container> -->
         <!-- using the locally installed docker container, replace with quay.io once deloyed -->
