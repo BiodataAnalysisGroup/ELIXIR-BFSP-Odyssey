@@ -1,0 +1,51 @@
+<tool id="interactive_tool_odyssey" tool_type="interactive" name="Odyssey" version="1.0.0" profile="23.1">
+    <description>Run the Odyssey App</description>
+    <requirements>
+        <!-- <container type="docker">quay.io/TODO:0.1</container> -->
+        <!-- using the locally installed docker container, replace with quay.io once deloyed -->
+        <container type="docker">shiny-odyssey:latest</container>
+    </requirements>
+    <entry_points>
+        <entry_point name="Odyssey" requires_domain="True">
+            <!-- This port is exposed by the docker container -->
+            <port>3838</port>
+        </entry_point>
+    </entry_points>
+    <!-- get environment variables needed for the put / get function -->
+    <environment_variables>
+        <environment_variable name="HISTORY_ID">$__history_id__</environment_variable>
+        <environment_variable name="REMOTE_HOST">$__galaxy_url__</environment_variable>
+        <environment_variable name="GALAXY_WEB_PORT">8080</environment_variable>
+        <environment_variable name="GALAXY_URL">$__galaxy_url__</environment_variable>
+        <environment_variable name="DEBUG">TRUE</environment_variable>
+        <environment_variable name="API_KEY" inject="api_key"/>
+    </environment_variables>
+
+    <command><![CDATA[
+    mkdir -p ./shiny_input ./shiny_output &&
+
+    export SHINY_INPUT_DIR=\$PWD/shiny_input &&
+    export SHINY_OUTPUT_DIR=\$PWD/shiny_output &&
+
+    Rscript /app_setup.R
+
+    ]]>
+    </command>
+    <outputs>
+        <collection name="output_collection" type="list" label="RData collection">
+            <discover_datasets pattern="__designation_and_ext__" directory="./shiny_output" visible="false"/>
+        </collection>
+    </outputs>
+    <tests>
+        <test expect_num_outputs="1"/>
+    </tests>
+    <help><![CDATA[
+
+Wrapper for ELIXIR-BFSP-Odyssey
+See https://github.com/BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey
+        
+]]></help>
+    <citations>
+        <citation type="doi">10.1371/journal.pone.0061217</citation>
+    </citations>
+</tool>
