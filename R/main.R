@@ -58,7 +58,6 @@ run_odyssey <- function(...) {
             
             sourceInput("source"),
             
-            
             tableOptions("table1"),
             hr(),
             

@@ -16,7 +16,7 @@ sourceInput    <- function(id) {
         radioButtons(
             NS(id, "source_input"), 
             "Input data source", 
-            choices = c("ENA", "GBIF")
+            choices = c("ENA", "GBIF", "User data")
         ),
         
         selectInput(
