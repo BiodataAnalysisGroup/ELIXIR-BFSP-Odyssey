@@ -16,7 +16,7 @@ sourceInput    <- function(id) {
         radioButtons(
             NS(id, "source_input"), 
             "Input data source", 
-            choices = c("ENA", "GBIF")
+            choices = c("ENA", "GBIF", "User data")
         ),
         
         selectInput(
@@ -429,6 +429,7 @@ hometextUi     <- function(id) {
         renderUI(
             HTML("
         <div>
+          <img src='https://github.com/natanast/ELIXIR-BFSP-Odyssey/tree/main/inst/pic/logo_nbg.png' width='200' alt='Odyssey Logo'/>
           <h3 style='color: #004164;'>Welcome</h3>
           <h6 style='color: #326286;'>Welcome to Odyssey, an interactive R Shiny web application designed to facilitate the exploration of molecular biodiversity in Greece.</h6>
           <br>
