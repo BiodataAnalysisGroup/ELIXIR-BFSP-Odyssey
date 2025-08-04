@@ -12,19 +12,18 @@ european_countries <- c(
 #'
 sourceInput    <- function(id) {
     
-    
     tagList(
         
         radioButtons(
             NS(id, "source_input"), 
             "Input data source", 
-            choices = c("ENA", "GBIF", "User data")
+            choices = c("ENA", "GBIF")
         ),
         
         selectInput(
             NS(id, "country"),
             "Country of interest: ",
-            choices = european_countries,
+            choices = c(european_countries),
             selected = "Greece"
         ),
         
