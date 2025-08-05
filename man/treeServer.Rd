@@ -2,15 +2,21 @@
 % Please edit documentation in R/overview.R
 \name{treeServer}
 \alias{treeServer}
-\title{Title}
+\title{Overview Tab: Tree Chart of Taxonomic Hierarchy}
 \usage{
 treeServer(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string specifying the module namespace identifier.}
 
-\item{df}{data table}
+\item{df}{A reactive expression returning a \code{data.table} with columns \code{tax_division2} and \code{scientific_name}.}
+}
+\value{
+A Shiny output object rendering a tree chart with taxonomic relationships.
 }
 \description{
-Title
+Server module that generates an interactive tree chart visualizing the taxonomic
+structure of the dataset, based on \code{tax_division2} (parent taxonomic group) and
+\code{scientific_name} (child taxa). The chart is rendered using the \code{echarts4r} package.
+and is used in the Overview tab.
 }

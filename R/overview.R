@@ -1,10 +1,16 @@
 
 
-#' Title
+#' Overview Tab: Area Plot of Observations Over Time
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' Server module that generates an interactive area chart displaying the number of observations 
+#' (based on `first_public` dates) over time, grouped by year and month. 
+#' This plot is used in the Overview tab and is rendered using the `echarts4r` package.
 #'
+#' @param id Character string specifying the module namespace identifier.
+#' @param df A reactive `data.table` containing a `first_public` column (as character or Date).
+#'
+#' @return A Shiny output object rendering the echarts plot.
+#' 
 #' @export
 plotServer1    <- function(id, df) {
     
@@ -43,7 +49,7 @@ plotServer1    <- function(id, df) {
     })
 }
 
-#' Title
+#' Overview Tab: Bar plot of Tax Divisions
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -69,7 +75,7 @@ plotServer2    <- function(id, df) {
     })
 }
 
-#' Title
+#' Overview Tab: Wordcloud of Scientific Names
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -107,7 +113,7 @@ plotServer3    <- function(id, df) {
     })
 }
 
-#' Title
+#' Overview Tab: Pie Chart with the Isolation Source
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -154,10 +160,17 @@ plotServer4    <- function(id, df) {
     })
 }
 
-#' Title
+#' Overview Tab: Tree Chart of Taxonomic Hierarchy
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' Server module that generates an interactive tree chart visualizing the taxonomic
+#' structure of the dataset, based on `tax_division2` (parent taxonomic group) and 
+#' `scientific_name` (child taxa). The chart is rendered using the `echarts4r` package.
+#' and is used in the Overview tab.
+#'
+#' @param id Character string specifying the module namespace identifier.
+#' @param df A reactive expression returning a `data.table` with columns `tax_division2` and `scientific_name`.
+#'
+#' @return A Shiny output object rendering a tree chart with taxonomic relationships.
 #'
 #' @export
 treeServer     <- function(id, df) {

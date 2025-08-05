@@ -2,7 +2,7 @@
 % Please edit documentation in R/overview.R
 \name{plotServer3}
 \alias{plotServer3}
-\title{Title}
+\title{Overview Tab: Wordcloud of Scientific Names}
 \usage{
 plotServer3(id, df)
 }
@@ -12,5 +12,5 @@ plotServer3(id, df)
 \item{df}{data table}
 }
 \description{
-Title
+Overview Tab: Wordcloud of Scientific Names
 }

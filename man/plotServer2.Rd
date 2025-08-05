@@ -2,7 +2,7 @@
 % Please edit documentation in R/overview.R
 \name{plotServer2}
 \alias{plotServer2}
-\title{Title}
+\title{Overview Tab: Bar plot of Tax Divisions}
 \usage{
 plotServer2(id, df)
 }
@@ -12,5 +12,5 @@ plotServer2(id, df)
 \item{df}{data table}
 }
 \description{
-Title
+Overview Tab: Bar plot of Tax Divisions
 }
