@@ -13,6 +13,7 @@
 #'
 sourceInput    <- function(id) {
     
+    european_countries <- c("Greece", "Norway")
 
     tagList(
         
@@ -25,7 +26,7 @@ sourceInput    <- function(id) {
         selectInput(
             NS(id, "country"),
             "Country of interest: ",
-            choices = c("Greece", "Norway"),
+            choices = c(european_countries),
             selected = "Greece"
         ),
         
@@ -71,7 +72,7 @@ tableOptions   <- function(id) {
             NS(id, "group_by"), "Group by", selected = NULL,
             choices = c(
                 "Tax_division"   = "tax_division2",
-                "Sientific_name" = "scientific_name",
+                "Scientific_name" = "scientific_name",
                 "Tag1"            = "tag1",
                 "Tag2"            = "tag2",
                 "Tag3"            = "tag3"
