@@ -1,7 +1,13 @@
 
-#' Title
+#' ENA Query
+#' 
+#' This Shiny server module retrieves sequence data from the ENA database
+#' based on user input for country and date range.
 #'
-#' @param id numeric identifier
+#' @param id Character string for namespacing the module (used with \code{moduleServer}).
+#' 
+#' @return A reactive expression that returns a \code{data.table} of the downloaded data.
+#'
 #'
 #' @export
 #'

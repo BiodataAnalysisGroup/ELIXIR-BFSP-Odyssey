@@ -2,7 +2,7 @@
 % Please edit documentation in R/table.R
 \name{downloadServer}
 \alias{downloadServer}
-\title{Title}
+\title{Table Tab}
 \usage{
 downloadServer(id, df)
 }
@@ -12,5 +12,5 @@ downloadServer(id, df)
 \item{df}{data table}
 }
 \description{
-Title
+Table Tab
 }

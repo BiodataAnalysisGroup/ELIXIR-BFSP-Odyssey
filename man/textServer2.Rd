@@ -2,7 +2,7 @@
 % Please edit documentation in R/table.R
 \name{textServer2}
 \alias{textServer2}
-\title{Title}
+\title{Table Tab}
 \usage{
 textServer2(id, df)
 }
@@ -12,5 +12,5 @@ textServer2(id, df)
 \item{df}{data table}
 }
 \description{
-Title
+Table Tab
 }

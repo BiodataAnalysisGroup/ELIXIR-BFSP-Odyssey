@@ -2,7 +2,7 @@
 % Please edit documentation in R/map.R
 \name{mapServer}
 \alias{mapServer}
-\title{Title}
+\title{Map tab}
 \usage{
 mapServer(id, df)
 }
@@ -12,5 +12,5 @@ mapServer(id, df)
 \item{df}{data table}
 }
 \description{
-Title
+Map tab
 }

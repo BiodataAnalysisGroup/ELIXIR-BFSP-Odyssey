@@ -1,8 +1,13 @@
 
 
-#' Sidebar
+#' Sidebar: Source Selection UI
+#' 
+#' This UI module displays inputs for selecting a data source, country, date range,
+#' and a button to trigger loading.
 #'
-#' @param id numeric identifier
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#'
+#' @return A \code{tagList} with UI elements for selecting the data source and filters.
 #'
 #' @export
 #'
@@ -44,9 +49,13 @@ sourceInput    <- function(id) {
 }
 
 
-#' Sidebar
+#' Sidebar: Table Options UI
 #'
-#' @param id numeric identifier
+#' This UI module displays checkboxes to show filters and group data by selected categories.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#' 
+#' @return A \code{tagList} with UI elements for table customization.
 #'
 #' @export
 #'

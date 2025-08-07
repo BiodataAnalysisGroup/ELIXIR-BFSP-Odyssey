@@ -2,7 +2,7 @@
 % Please edit documentation in R/table.R
 \name{datasetServer}
 \alias{datasetServer}
-\title{Title}
+\title{Table Tab}
 \usage{
 datasetServer(id, df)
 }
@@ -12,5 +12,5 @@ datasetServer(id, df)
 \item{df}{A reactive expression returning a data.frame containing the dataset.}
 }
 \description{
-Title
+Table Tab
 }

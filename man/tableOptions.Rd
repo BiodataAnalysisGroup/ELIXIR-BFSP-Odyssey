@@ -2,13 +2,16 @@
 % Please edit documentation in R/sidebar.R
 \name{tableOptions}
 \alias{tableOptions}
-\title{Title}
+\title{Sidebar: Table Options UI}
 \usage{
 tableOptions(id)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string used for namespacing the input IDs in the UI module.}
+}
+\value{
+A \code{tagList} with UI elements for table customization.
 }
 \description{
-Title
+This UI module displays checkboxes to show filters and group data by selected categories.
 }
