@@ -1,10 +1,6 @@
 
 
-european_countries <- c(
-    "Greece", "Norway"
-)
-
-#' Title
+#' Sidebar
 #'
 #' @param id numeric identifier
 #'
@@ -12,6 +8,7 @@ european_countries <- c(
 #'
 sourceInput    <- function(id) {
     
+
     tagList(
         
         radioButtons(
@@ -23,7 +20,7 @@ sourceInput    <- function(id) {
         selectInput(
             NS(id, "country"),
             "Country of interest: ",
-            choices = c(european_countries),
+            choices = c("Greece", "Norway"),
             selected = "Greece"
         ),
         
@@ -47,7 +44,7 @@ sourceInput    <- function(id) {
 }
 
 
-#' Title
+#' Sidebar
 #'
 #' @param id numeric identifier
 #'

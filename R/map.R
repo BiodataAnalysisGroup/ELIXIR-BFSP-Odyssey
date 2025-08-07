@@ -1,6 +1,6 @@
 
 
-#' Title
+#' Map tab
 #'
 #' @param id numeric identifier
 #' @param df data table

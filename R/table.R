@@ -1,5 +1,5 @@
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df A reactive expression returning a data.frame containing the dataset.
@@ -58,7 +58,7 @@ datasetServer <- function(id, df) {
 }
 
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -107,7 +107,7 @@ tableServer    <- function(id, df) {
     })
 }
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -125,7 +125,7 @@ textServer1    <- function(id, df) {
     
 }
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -139,7 +139,7 @@ textServer2    <- function(id, df) {
     })
 }
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -153,7 +153,7 @@ textServer3    <- function(id, df) {
     })
 }
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -168,7 +168,7 @@ textServer4    <- function(id, df) {
 }
 
 
-#' Title
+#' Table Tab
 #'
 #' @param id numeric identifier
 #' @param df data table
