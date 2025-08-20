@@ -2,15 +2,19 @@
 % Please edit documentation in R/table.R
 \name{textServer1}
 \alias{textServer1}
-\title{Table Tab}
+\title{Table Tab: Number of Rows}
 \usage{
 textServer1(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string for namespacing the module}
 
-\item{df}{data table}
+\item{df}{A reactive \code{data.table}; the dataset for which the number of observations is computed.}
+}
+\value{
+A character string with the formatted number of rows
 }
 \description{
-Table Tab
+A Shiny server module that returns the number of rows in the dataset.
+Typically used in the Table Tab to display the total number of observations.
 }

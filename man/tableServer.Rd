@@ -2,15 +2,20 @@
 % Please edit documentation in R/table.R
 \name{tableServer}
 \alias{tableServer}
-\title{Table Tab}
+\title{Table Tab: Server Module}
 \usage{
 tableServer(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string for namespacing the module}
 
-\item{df}{data table}
+\item{df}{A reactive \code{data.table} containing the sequence dataset.}
+}
+\value{
+A \code{reactable} table rendered in the UI.
 }
 \description{
-Table Tab
+A Shiny server module that renders an interactive \code{reactable} table
+displaying sequence data. The table supports grouping, filtering, pagination,
+and clickable accession links.
 }

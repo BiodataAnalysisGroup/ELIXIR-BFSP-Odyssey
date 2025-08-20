@@ -7,10 +7,17 @@
 mapServer(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string specifying the module namespace identifier.}
 
-\item{df}{data table}
+\item{df}{A reactive \code{data.table} containing sequence records.
+Must include columns \code{long}, \code{lat}, \code{accession},
+\code{tax_division2}, and \code{scientific_name}.}
+}
+\value{
+A \code{leaflet} map rendered in the UI.
 }
 \description{
-Map tab
+A Shiny server module that renders an interactive leaflet map showing
+the locations of samples. Points are clustered and include
+popups with metadata (accession, taxonomic division, scientific name).
 }

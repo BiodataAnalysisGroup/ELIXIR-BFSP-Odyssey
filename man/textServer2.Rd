@@ -2,15 +2,19 @@
 % Please edit documentation in R/table.R
 \name{textServer2}
 \alias{textServer2}
-\title{Table Tab}
+\title{Table Tab: Number of Taxonomic Divisions}
 \usage{
 textServer2(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string for namespacing the module}
 
-\item{df}{data table}
+\item{df}{A reactive \code{data.table}; the dataset for which unique taxonomic divisions are counted}
+}
+\value{
+A numeric value representing the count of unique \code{tax_division2} entries
 }
 \description{
-Table Tab
+A Shiny server module that returns the number of unique taxonomic divisions
+in the dataset, typically used in the Table Tab to summarize diversity.
 }

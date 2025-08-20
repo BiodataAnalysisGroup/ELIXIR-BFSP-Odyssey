@@ -2,15 +2,24 @@
 % Please edit documentation in R/table.R
 \name{datasetServer}
 \alias{datasetServer}
-\title{Table Tab}
+\title{Table Tab: Data Processing}
 \usage{
 datasetServer(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string for namespacing the module}
 
-\item{df}{A reactive expression returning a data.frame containing the dataset.}
+\item{df}{A reactive expression returning a \code{data.frame} (or \code{data.table})
+with ENA query results. Must contain at least the columns:
+\code{tax_division}, \code{tag}, \code{location}, and \code{first_public}.}
+}
+\value{
+A reactive expression returning a processed \code{data.frame} with cleaned
+taxonomic information, split tags, and parsed coordinates, ready for use in tables
+and visualizations.
 }
 \description{
-Table Tab
+A Shiny server module that preprocesses the ENA dataset for use in the
+table and other tabs. It standardizes taxonomic divisions, extracts tags,
+parses coordinates, and orders rows by publication date.
 }

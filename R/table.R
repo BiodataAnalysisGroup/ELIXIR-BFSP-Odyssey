@@ -1,8 +1,17 @@
 
-#' Table Tab
+#' Table Tab: Data Processing
 #'
-#' @param id numeric identifier
-#' @param df A reactive expression returning a data.frame containing the dataset.
+#' A Shiny server module that preprocesses the ENA dataset for use in the
+#' table and other tabs. It standardizes taxonomic divisions, extracts tags,
+#' parses coordinates, and orders rows by publication date.
+#'
+#' @param id Character string for namespacing the module
+#' @param df A reactive expression returning a \code{data.frame} with ENA query results. 
+#' 
+#'
+#' @return A reactive expression returning a processed \code{data.frame} with cleaned
+#'   taxonomic information, split tags, and parsed coordinates, ready for use in tables
+#'   and visualizations.
 #'
 #' @export
 #'
@@ -58,10 +67,16 @@ datasetServer <- function(id, df) {
 }
 
 
-#' Table Tab
+#' Table Tab: Server Module
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that renders an interactive \code{reactable} table
+#' displaying sequence data. The table supports grouping, filtering, pagination,
+#' and clickable accession links.
+#'
+#' @param id Character string for namespacing the module
+#' @param df A reactive \code{data.table} containing the sequence dataset.
+#'
+#' @return A \code{reactable} table rendered in the UI.
 #'
 #' @export
 #'
@@ -107,10 +122,16 @@ tableServer    <- function(id, df) {
     })
 }
 
-#' Table Tab
+#' Table Tab: Number of Rows
+#' 
+#' A Shiny server module that returns the number of rows in the dataset.
+#' Typically used in the Table Tab to display the total number of observations.
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' @param id  Character string for namespacing the module
+#' @param df A reactive \code{data.table}; the dataset for which the number of observations is computed.
+#'
+#'
+#' @return A character string with the formatted number of rows
 #'
 #' @export
 #'
@@ -125,10 +146,16 @@ textServer1    <- function(id, df) {
     
 }
 
-#' Table Tab
+#' Table Tab: Number of Taxonomic Divisions
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that returns the number of unique taxonomic divisions
+#' in the dataset, typically used in the Table Tab to summarize diversity.
+#' 
+#' @param id Character string for namespacing the module
+#' @param df A reactive \code{data.table}; the dataset for which unique taxonomic divisions are counted
+#' 
+#' 
+#' @return A numeric value representing the count of unique \code{tax_division2} entries
 #'
 #' @export
 textServer2    <- function(id, df) {
@@ -139,11 +166,17 @@ textServer2    <- function(id, df) {
     })
 }
 
-#' Table Tab
+#' Table Tab: Number of Unique Scientific Names
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that returns the number of unique scientific names
+#' in the dataset, typically used in the Table Tab to summarize species diversity.
 #'
+#'
+#' @param id Character string for namespacing the module
+#' @param df A reactive \code{data.table}; the dataset for which unique scientific names are counted
+#' 
+#' @return A numeric value representing the count of unique \code{scientific_name} entries
+#' 
 #' @export
 textServer3    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
@@ -153,10 +186,15 @@ textServer3    <- function(id, df) {
     })
 }
 
-#' Table Tab
+#' Table Tab: Number of Unique Isolation Sources
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that returns the number of unique isolation sources
+#' in the dataset, typically used in the Table Tab to summarize data diversity.
+#'
+#' @param id Character string for namespacing the module
+#' @param df A reactive \code{data.table}; the dataset for which unique isolation sources are counted
+#'
+#' @return A numeric value representing the count of unique \code{isolation_source} entries
 #'
 #' @export
 textServer4    <- function(id, df) {
@@ -168,13 +206,17 @@ textServer4    <- function(id, df) {
 }
 
 
-#' Table Tab
+#' Table Tab: Download Dataset
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that provides a download handler for the dataset,
+#' allowing users to export the current data as a CSV file.
+#'
+#' @param id Character string for namespacing the module
+#' @param df A reactive \code{data.table} containing the dataset to be downloaded
+#'
+#' @return A Shiny download handler that exports \code{data.table} as a CSV file
 #'
 #' @export
-#'
 #' @importFrom utils write.csv
 downloadServer <- function(id, df) {
     

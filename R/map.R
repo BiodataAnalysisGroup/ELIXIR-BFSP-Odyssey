@@ -2,8 +2,15 @@
 
 #' Map tab
 #'
-#' @param id numeric identifier
-#' @param df data table
+#' A Shiny server module that renders an interactive leaflet map showing
+#' the locations of samples. Points are clustered and include 
+#' popups with metadata (accession, taxonomic division, scientific name).
+#' 
+#' 
+#' @param id Character string specifying the module namespace identifier.
+#' @param df A reactive \code{data.table} containing sequence records. 
+#' 
+#' @return A \code{leaflet} map rendered in the UI.
 #'
 #' @export
 #' @importFrom utils URLencode

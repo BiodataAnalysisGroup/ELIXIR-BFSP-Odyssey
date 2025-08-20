@@ -2,15 +2,19 @@
 % Please edit documentation in R/table.R
 \name{textServer4}
 \alias{textServer4}
-\title{Table Tab}
+\title{Table Tab: Number of Unique Isolation Sources}
 \usage{
 textServer4(id, df)
 }
 \arguments{
-\item{id}{numeric identifier}
+\item{id}{Character string for namespacing the module}
 
-\item{df}{data table}
+\item{df}{A reactive \code{data.table}; the dataset for which unique isolation sources are counted}
+}
+\value{
+A numeric value representing the count of unique \code{isolation_source} entries
 }
 \description{
-Table Tab
+A Shiny server module that returns the number of unique isolation sources
+in the dataset, typically used in the Table Tab to summarize data diversity.
 }
