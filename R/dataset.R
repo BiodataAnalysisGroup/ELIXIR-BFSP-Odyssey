@@ -1,51 +1,4 @@
 
-european_countries <- c(
-    "Greece", "Norway"
-)
-
-#' Title
-#'
-#' @param id numeric identifier
-#'
-#' @export
-#'
-sourceInput    <- function(id) {
-    
-    tagList(
-        
-        radioButtons(
-            NS(id, "source_input"), 
-            "Input data source", 
-            choices = c("ENA", "GBIF", "User data")
-        ),
-        
-        selectInput(
-            NS(id, "country"),
-            "Country of interest: ",
-            choices = c(european_countries),
-            selected = "Greece"
-        ),
-        
-        dateRangeInput(
-            NS(id, "range"), "Dates of interest:",
-            start = Sys.Date() - 364, # changed to 12 months
-            end = Sys.Date() - 330, # changed
-            max =  Sys.Date()
-        ),
-        
-        actionButton(
-            NS(id, "go"),
-            "Load Data"
-        ),
-        hr(),
-        
-        
-    )
-    
-    
-}
-
-
 #' Title
 #'
 #' @param id numeric identifier
@@ -86,37 +39,6 @@ mod_data_server <- function(id) {
 }
 
 
-
-#' Title
-#'
-#' @param id numeric identifier
-#'
-#' @export
-#'
-tableOptions   <- function(id) {
-    
-    
-    tagList(
-        
-        checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
-        hr(),
-        
-        checkboxGroupInput(
-            NS(id, "group_by"), "Group by", selected = NULL,
-            choices = c(
-                "Tax_division"   = "tax_division2",
-                "Sientific_name" = "scientific_name",
-                "Tag1"            = "tag1",
-                "Tag2"            = "tag2",
-                "Tag3"            = "tag3"
-            )
-        ),
-        
-        hr()
-    )
-    
-    
-}
 
 #' Title
 #'
@@ -175,90 +97,6 @@ datasetServer <- function(id, df) {
         return(filtered)
     })
 }
-
-# datasetServer  <- function(id, df) {
-# 
-#     moduleServer(id, function(input, output, session) {
-# 
-#         # out = fread("https://www.ebi.ac.uk/ena/portal/api/search?result=sequence&query=country=%22Greece%22&fields=accession,country,first_public,altitude,location,isolation_source,host,host_tax_id,tax_division,tax_id,scientific_name,tag,keywords,topology")
-#         # out = fread("https://www.ebi.ac.uk/ena/portal/api/search?result=sequence&query=country=%22Greece%22+OR+country=%22Norway%22&fields=accession,country,first_public,altitude,location,isolation_source,host,host_tax_id,tax_division,tax_id,scientific_name,tag,keywords,topology")
-#         # out = fread("https://www.ebi.ac.uk/ena/portal/api/search?result=sequence&fields=accession,country,first_public,altitude,location,isolation_source,host,host_tax_id,tax_division,tax_id,scientific_name,tag,keywords,topology")
-# 
-#         filtered <- reactive({
-# 
-#         # fix tax
-#         tax_division_lookup <- list(
-#                 "PRO" = "Prokaryota",
-#                 "VRL" = "Virus",
-#                 "MAM" = "Mammalia",
-#                 "INV" = "Invertebrates",
-#                 "VRT" = "Vertebrates",
-#                 "PLN" = "Plantae",
-#                 "FUN" = "Fungi",
-#                 "HUM" = "Homo sapiens",
-#                 "ENV" = "Environment",
-#                 "ROD" = "Rodentia",
-#                 "MUS" = "Mus",
-#                 "PHG" = "Phage"
-#             )
-# 
-#             df()$tax_division2 <- sapply(df()$tax_division, function(x) {
-#                 if (x == "") {
-#                     "Unknown"
-#                 } else {
-#                     tax_division_lookup[[x]]
-#                 }
-#             })
-# 
-#             df()$tax_division2 <- as.character(df()$tax_division2)
-# 
-# 
-#             # fix tags
-#             split_tags <- str_split(df()$tag, "[:;]", simplify = TRUE)
-# 
-#             df()$tag1 <- split_tags[, 1]
-#             df()$tag2 <- split_tags[, 2]
-#             df()$tag3 <- split_tags[, 3]
-#             df()$tag4 <- split_tags[, 4]
-#             df()$tag5 <- split_tags[, 5]
-# 
-# 
-#             # lat long
-#             split_location <- str_match(df()$location, "([0-9.]+) N ([0-9.]+) E")
-# 
-#             df()$lat <- as.numeric(split_location[, 2])
-#             df()$long <- as.numeric(split_location[, 3])
-# 
-# 
-#             # fix order
-#             df() = df()[order(df()$first_public, decreasing = TRUE), ]
-#             })
-# 
-#             return(filtered)
-# 
-#     })
-# }
-
-
-# filterServer   <- function(id, df) {
-# 
-#     moduleServer(id, function(input, output, session) {
-# 
-#         filtered <- reactive({
-# 
-#             df[
-#                 df$first_public >= input$range[1] &
-#                 df$first_public <= input$range[2] &
-#                 df$country == input$country
-#             ]
-# 
-#         })
-# 
-#     })
-# 
-#     # return(filtered)
-# 
-# }
 
 #' Title
 #'
@@ -428,8 +266,9 @@ hometextUi     <- function(id) {
         
         renderUI(
             HTML("
+            
         <div>
-          <img src='https://github.com/natanast/ELIXIR-BFSP-Odyssey/tree/main/inst/pic/logo_nbg.png' width='200' alt='Odyssey Logo'/>
+          <img src='https://raw.githubusercontent.com/natanast/ELIXIR-BFSP-Odyssey/dev/inst/pic/logo_nobg.png' width='250' alt='Odyssey Logo' style='float: right; margin-top: -50px; margin-right: -20px;'/>
           <h3 style='color: #004164;'>Welcome</h3>
           <h6 style='color: #326286;'>Welcome to Odyssey, an interactive R Shiny web application designed to facilitate the exploration of molecular biodiversity in Greece.</h6>
           <br>

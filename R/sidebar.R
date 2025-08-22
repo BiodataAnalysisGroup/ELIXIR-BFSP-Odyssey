@@ -1,0 +1,79 @@
+
+
+european_countries <- c(
+    "Greece", "Norway"
+)
+
+#' Title
+#'
+#' @param id numeric identifier
+#'
+#' @export
+#'
+sourceInput    <- function(id) {
+    
+    tagList(
+        
+        radioButtons(
+            NS(id, "source_input"), 
+            "Input data source", 
+            choices = c("ENA", "GBIF")
+        ),
+        
+        selectInput(
+            NS(id, "country"),
+            "Country of interest: ",
+            choices = c(european_countries),
+            selected = "Greece"
+        ),
+        
+        dateRangeInput(
+            NS(id, "range"), "Dates of interest:",
+            start = Sys.Date() - 364, # changed to 12 months
+            end = Sys.Date() - 330, # changed
+            max =  Sys.Date()
+        ),
+        
+        actionButton(
+            NS(id, "go"),
+            "Load Data"
+        ),
+        hr(),
+        
+        
+    )
+    
+    
+}
+
+
+#' Title
+#'
+#' @param id numeric identifier
+#'
+#' @export
+#'
+tableOptions   <- function(id) {
+    
+    
+    tagList(
+        
+        checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
+        hr(),
+        
+        checkboxGroupInput(
+            NS(id, "group_by"), "Group by", selected = NULL,
+            choices = c(
+                "Tax_division"   = "tax_division2",
+                "Sientific_name" = "scientific_name",
+                "Tag1"            = "tag1",
+                "Tag2"            = "tag2",
+                "Tag3"            = "tag3"
+            )
+        ),
+        
+        hr()
+    )
+    
+    
+}
