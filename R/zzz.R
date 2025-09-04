@@ -16,3 +16,8 @@
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Welcome to Odyssey!")
 }
+
+addResourcePath(
+    prefix = "www",
+    directoryPath = system.file("www", package = "Odyssey")
+)
