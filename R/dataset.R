@@ -1,5 +1,4 @@
 
-
 #' Title
 #'
 #' @param id numeric identifier
@@ -38,6 +37,8 @@ mod_data_server <- function(id) {
         return(fetch_data)
     })
 }
+
+
 
 #' Title
 #'
@@ -265,8 +266,9 @@ hometextUi     <- function(id) {
         
         renderUI(
             HTML("
+            
         <div>
-          <img src='https://github.com/natanast/ELIXIR-BFSP-Odyssey/tree/main/inst/pic/logo_nbg.png' width='200' alt='Odyssey Logo'/>
+          <img src='www/logo_nobg.png' width='250' alt='Odyssey Logo' style='float: right; margin-top: -50px; margin-right: -20px;'/>
           <h3 style='color: #004164;'>Welcome</h3>
           <h6 style='color: #326286;'>Welcome to Odyssey, an interactive R Shiny web application designed to facilitate the exploration of molecular biodiversity in Greece.</h6>
           <br>
