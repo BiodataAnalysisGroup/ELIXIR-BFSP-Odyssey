@@ -9,9 +9,7 @@ mapServer(id, df)
 \arguments{
 \item{id}{Character string specifying the module namespace identifier.}
 
-\item{df}{A reactive \code{data.table} containing sequence records.
-Must include columns \code{long}, \code{lat}, \code{accession},
-\code{tax_division2}, and \code{scientific_name}.}
+\item{df}{A reactive \code{data.table} containing sequence records.}
 }
 \value{
 A \code{leaflet} map rendered in the UI.

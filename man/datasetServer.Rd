@@ -9,9 +9,7 @@ datasetServer(id, df)
 \arguments{
 \item{id}{Character string for namespacing the module}
 
-\item{df}{A reactive expression returning a \code{data.frame} (or \code{data.table})
-with ENA query results. Must contain at least the columns:
-\code{tax_division}, \code{tag}, \code{location}, and \code{first_public}.}
+\item{df}{A reactive expression returning a \code{data.frame} with ENA query results.}
 }
 \value{
 A reactive expression returning a processed \code{data.frame} with cleaned
