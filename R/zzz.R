@@ -2,7 +2,7 @@
 
     utils::globalVariables(
         c(
-            ".", "year_month", "Dates", 
+            ".", "year_month", "Dates", "european_countries",
             "Number_of_isolation_source", 
             "Number_of_names", 
             "Number_of_taxes",
@@ -16,6 +16,7 @@
 .onAttach <- function(libname, pkgname) {
     packageStartupMessage("Welcome to Odyssey!")
 }
+
 
 addResourcePath(
     prefix = "www",
