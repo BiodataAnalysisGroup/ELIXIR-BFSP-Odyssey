@@ -2,13 +2,18 @@
 % Please edit documentation in R/main.R
 \name{run_odyssey}
 \alias{run_odyssey}
-\title{Title}
+\title{Run Odyssey Shiny Application}
 \usage{
 run_odyssey(...)
 }
 \arguments{
 \item{...}{parameters}
 }
+\value{
+A Shiny application object launched in the current R session
+}
 \description{
-Title
+Launches the Odyssey Shiny app for exploring molecular biodiversity.
+The app provides interactive tabs for Home, Overview (summary statistics and visualizations),
+Table (data exploration and download), and Map (geographical visualization).
 }
