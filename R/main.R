@@ -39,6 +39,14 @@ run_odyssey <- function(...) {
                     target = "_blank",
                     style = "color: #F3F6FA; margin-top: 5px;
                     font-size: 1.5em; margin-left: 0; padding-right: 15px;"
+                ),
+                # Top-right toolbar (Info)
+            div(class = "app-toolbar",
+                # Info button
+                 actionLink(
+                   inputId = "info_btn", label = NULL,
+                   icon = icon("info-circle"), class = "btn btn-link", title = "How to use this app"
+                  )
                 )
                 # a(
                 #   href = "https://github.com/npechl/odyssey/issues",
@@ -237,6 +245,29 @@ run_odyssey <- function(...) {
     
     server <- function(input, output, session) {
         
+        # Reusable modal with instructions
+        info_modal <- function(){
+            modalDialog(
+                title = "How to use the app",
+                size = "l", easyClose = TRUE,
+                footer = modalButton("Close"),
+                tagList(
+                    p("This app lets you explore records from ENA and GBIF.")
+                    
+                )
+            )
+        }
+        
+        # Show modal automatically on app load
+        session$onFlushed(function(){
+            showModal(info_modal())
+        }, once = TRUE)
+        
+        # Also open modal when clicking the Info button
+        observeEvent(input$info_btn, {
+            showModal(info_modal())
+        })
+        
         df_raw <- mod_data_server("source")
         
         df1 <- datasetServer("table1", df_raw)
@@ -276,6 +307,8 @@ run_odyssey <- function(...) {
         
         
     }
+    
+    
     
     suppressWarnings(shinyApp(ui, server))
     
