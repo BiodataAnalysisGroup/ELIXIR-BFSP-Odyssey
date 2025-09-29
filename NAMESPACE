@@ -3,7 +3,6 @@
 export(datasetServer)
 export(downloadServer)
 export(hometextUi)
-export(info_modal)
 export(mapServer)
 export(mod_data_server)
 export(plotServer1)
