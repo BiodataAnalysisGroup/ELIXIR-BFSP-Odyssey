@@ -1,7 +1,13 @@
 
-#' Title
+#' Run Odyssey Shiny Application
+#' 
+#' Launches the Odyssey Shiny app for exploring molecular biodiversity.
+#' The app provides interactive tabs for Home, Overview (summary statistics and visualizations),
+#' Table (data exploration and download), and Map (geographical visualization).
 #'
 #' @param ... parameters
+#' 
+#' @return A Shiny application object launched in the current R session
 #'
 #' @export
 #'
@@ -15,6 +21,7 @@
 #' 
 run_odyssey <- function(...) {
     
+
     ui <- page_sidebar(
         
         title = tagList(
@@ -273,13 +280,3 @@ run_odyssey <- function(...) {
     suppressWarnings(shinyApp(ui, server))
     
 }
-
-
-utils::globalVariables(c(
-    ".", "year_month", "Dates", 
-    "Number_of_isolation_source", 
-    "Number_of_names", 
-    "Number_of_taxes",
-    "color", "isolation_source", "lat", "long", 
-    "scientific_name", "tax_division2"
-))
