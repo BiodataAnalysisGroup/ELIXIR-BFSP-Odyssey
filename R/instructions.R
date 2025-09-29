@@ -58,8 +58,8 @@ info_modal <- function() {
                     tags$b("Map"), " to visualize the records geographically."
                 )
             ),
-            # h5("Use the info button (top right) to reopen these instructions anytime.", 
-               # style = "color:#386375; margin-top:1rem;"),
+            h5("Use the info button (top right) to reopen these instructions anytime.",
+            style = "color:#386375; margin-top:1rem;"),
 
             style = "margin-bottom: 1rem; border-radius: 1rem; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); padding: 1rem;"
         )
