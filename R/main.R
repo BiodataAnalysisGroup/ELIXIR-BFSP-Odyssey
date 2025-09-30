@@ -38,8 +38,22 @@ run_odyssey <- function(...) {
                     icon("github", lib = "font-awesome"),
                     target = "_blank",
                     style = "color: #F3F6FA; margin-top: 5px;
-                    font-size: 1.5em; margin-left: 0; padding-right: 15px;"
+                             font-size: 1.5em; margin-left: 0; 
+                             padding-right: 15px;"
+                ),
+            # Info button
+            div(
+                class = "app-toolbar",
+                actionLink(
+                    inputId = "info_btn", 
+                    label = NULL,
+                    icon = icon("info-circle"), 
+                    class = "btn btn-link", 
+                    style = "color: #F3F6FA; margin-top: 5px;
+                             font-size: 1.25em; margin-left: 0; 
+                             padding-right: 15px;"
                 )
+            )
                 # a(
                 #   href = "https://github.com/npechl/odyssey/issues",
                 #   icon("circle-dot", lib = "font-awesome"),
@@ -237,6 +251,7 @@ run_odyssey <- function(...) {
     
     server <- function(input, output, session) {
         
+
         df_raw <- mod_data_server("source")
         
         df1 <- datasetServer("table1", df_raw)
@@ -274,8 +289,18 @@ run_odyssey <- function(...) {
             session$keepAlive
         })
         
+        # Show modal automatically on app load
+        session$onFlushed(function(){
+            showModal(info_modal())
+        }, once = TRUE)
+        
+        # Also open modal when clicking the Info button
+        observeEvent(input$info_btn, {
+            showModal(info_modal())
+        })
         
     }
+    
     
     suppressWarnings(shinyApp(ui, server))
     
