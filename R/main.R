@@ -79,32 +79,31 @@ run_odyssey <- function(...) {
             
             sourceInput("source"),
             
-            tableOptions("table1"),
-            hr(),
+            tableOptions("table1")
             
-            fluidPage(
-                
-                style = "position: absolute; bottom: 15px; left: 0; right: 0;",
-                h5(
-                    style = "color: #004164;"
-                ),
-                p(
-                    a(
-                        href = "https://github.com/npechl",
-                        style = "color: #004164;",
-                        "Nikos Pechlivanis ",
-                        icon("github", lib = "font-awesome")
-                    )
-                ),
-                p(
-                    a(
-                        href = "https://github.com/natanast",
-                        style = "color: #004164;",
-                        "Natasa Anastasiadou ",
-                        icon("github", lib = "font-awesome")
-                    )
-                )
-            )
+            # fluidPage(
+            #     
+            #     style = "position: absolute; bottom: 15px; left: 0; right: 0;",
+            #     h5(
+            #         style = "color: #004164;"
+            #     ),
+            #     p(
+            #         a(
+            #             href = "https://github.com/npechl",
+            #             style = "color: #004164;",
+            #             "Nikos Pechlivanis ",
+            #             icon("github", lib = "font-awesome")
+            #         )
+            #     ),
+            #     p(
+            #         a(
+            #             href = "https://github.com/natanast",
+            #             style = "color: #004164;",
+            #             "Natasa Anastasiadou ",
+            #             icon("github", lib = "font-awesome")
+            #         )
+            #     )
+            # )
             
         ),
         

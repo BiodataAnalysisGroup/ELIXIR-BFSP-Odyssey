@@ -23,6 +23,8 @@ sourceInput    <- function(id) {
             choices = c("ENA", "GBIF")
         ),
         
+        hr(),
+        
         selectInput(
             NS(id, "country"),
             "Country of interest: ",
@@ -30,10 +32,12 @@ sourceInput    <- function(id) {
             selected = "Greece"
         ),
         
+        hr(), 
+        
         dateRangeInput(
             NS(id, "range"), "Dates of interest:",
-            start = Sys.Date() - 364, # changed to 12 months
-            end = Sys.Date() - 330, # changed
+            start = Sys.Date() - 364, 
+            end = Sys.Date() - 330, 
             max =  Sys.Date()
         ),
         
@@ -65,9 +69,10 @@ tableOptions   <- function(id) {
     
     tagList(
         
-        checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
-        hr(),
+        h5("Table options", style = "color:#2b5769;"),
         
+        checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
+
         checkboxGroupInput(
             NS(id, "group_by"), "Group by", selected = NULL,
             choices = c(
@@ -77,9 +82,7 @@ tableOptions   <- function(id) {
                 "Tag2"            = "tag2",
                 "Tag3"            = "tag3"
             )
-        ),
-        
-        hr()
+        )
     )
     
     
