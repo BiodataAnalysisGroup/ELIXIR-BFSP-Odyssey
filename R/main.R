@@ -38,7 +38,8 @@ run_odyssey <- function(...) {
                     icon("github", lib = "font-awesome"),
                     target = "_blank",
                     style = "color: #F3F6FA; margin-top: 5px;
-                    font-size: 1.5em; margin-left: 0; padding-right: 15px;"
+                             font-size: 1.5em; margin-left: 0; 
+                             padding-right: 15px;"
                 )
                 # a(
                 #   href = "https://github.com/npechl/odyssey/issues",
@@ -237,6 +238,7 @@ run_odyssey <- function(...) {
     
     server <- function(input, output, session) {
         
+
         df_raw <- mod_data_server("source")
         
         df1 <- datasetServer("table1", df_raw)
@@ -274,8 +276,9 @@ run_odyssey <- function(...) {
             session$keepAlive
         })
         
-        
+
     }
+    
     
     suppressWarnings(shinyApp(ui, server))
     
