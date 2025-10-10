@@ -2,11 +2,35 @@
 
 Hi there! Many thanks for taking an interest in improving `Odyssey`. This document outlines how to propose any changes to `Odyssey`.
 
-## Contribution workflow
+## Contributions
+
+### Getting familiar with Git and GitHub
+
+> **What is Git?**
+> 
+> Git is a version control system that tracks changes to files over time, allowing multiple people to collaborate on a project safely.
+>
+> **What is GitHub?**
+> 
+> GitHub is an online platform for hosting Git repositories and collaborating with others through pull requests, issues, and discussions.
+> 
+> **Essential Concepts**
+> - *Repository (repo)*: The project’s folder on GitHub.
+> - *Fork*: Your own copy of the repository, where you can make changes freely.
+> - *Branch*: A workspace for your changes (avoid working directly on main).
+> - *Commit*: A saved change with a message describing what you did.
+> - *Pull Request (PR)*: A request to merge your changes into the main project.
+
+1. Create a [GitHub](https://github.com/) account if you don’t already have one.
+2. Install [Git](https://git-scm.com/) on your computer.
+3. Configure Git with your information (in your terminal, powershell, etc.):
+
+```sh
+git config --global user.name  "Your Name"
+git config --global user.email "your.email@example.com"
+```
 
 ### GitHub issues
-
-#### What kind of issues can somebody open?
 
 - If you encounter a bug in the app, please open an issue using the Bug Report template.
 - For new feature suggestions (i.e., suggestions for improving the app, ??), use the Feature Request template.
@@ -14,7 +38,7 @@ Hi there! Many thanks for taking an interest in improving `Odyssey`. This docume
 
 Once the issue is created, you can assign a reviewer yourself or leave it unassigned — a team member will review it and take it from there.
 
-### Code contribution
+### App development
 
 If you'd like to write some code for `Odyssey`, the standard workflow is as follows:
 
@@ -57,7 +81,10 @@ You can fix typos, spelling mistakes, or grammatical errors in the documentation
 
 - New code should follow the tidyverse [style guide](https://style.tidyverse.org). You can use the [styler](https://CRAN.R-project.org/package=styler) package to apply these styles, but please don't restyle code that has nothing to do with your PR.  
 - We use [roxygen2](https://cran.r-project.org/package=roxygen2), with [Markdown syntax](https://roxygen2.r-lib.org/articles/rd-formatting.html), for documentation.  
-- We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. Contributions with test cases included are easier to accept.  
+
+### Unit testing
+
+We use [testthat](https://cran.r-project.org/package=testthat) for unit tests. Contributions with test cases included are easier to accept.  
 
 ## Code of Conduct
 
