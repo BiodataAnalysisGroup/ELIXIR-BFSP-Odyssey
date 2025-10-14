@@ -160,14 +160,18 @@ run_odyssey <- function(...) {
 
     # Show popup once on app launch
     session$onFlushed(function() {
-      showModal(modalDialog(
-        title = "Welcome to Odyssey!",
-        HTML("<p>Check out our GitHub page for more information:</p>
-              <p><a href='https://github.com/BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey' target='_blank'>Odyssey GitHub</a></p>"),
-        easyClose = TRUE,
-        footer = modalButton("Close")
-      ))
-    }, once = TRUE)
+  showModal(modalDialog(
+    title = "Welcome to Odyssey!",
+    HTML("
+      <p>Explore our Odyssey site below:</p>
+      <iframe src='https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/' 
+              width='100%' height='500px' style='border:1px solid #ccc;'></iframe>
+    "),
+    easyClose = TRUE,
+    footer = modalButton("Close"),
+    size = "l"  # small = 's', default = NULL, large = 'l'
+  ))
+}, once = TRUE)
     
     df_raw <- mod_data_server("source")
     df1 <- datasetServer("table1", df_raw)
