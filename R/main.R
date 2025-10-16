@@ -40,6 +40,20 @@ run_odyssey <- function(...) {
                     style = "color: #F3F6FA; margin-top: 5px;
                              font-size: 1.5em; margin-left: 0; 
                              padding-right: 15px;"
+                ),
+                
+                # Info button
+                div(
+                    class = "app-toolbar",
+                    actionLink(
+                        inputId = "info_btn", 
+                        label = NULL,
+                        icon = icon("info-circle"), 
+                        class = "btn btn-link", 
+                        style = "color: #F3F6FA; margin-top: 5px;
+                             font-size: 1.25em; margin-left: 0; 
+                             padding-right: 15px;"
+                    )
                 )
                 # a(
                 #   href = "https://github.com/npechl/odyssey/issues",
@@ -66,32 +80,31 @@ run_odyssey <- function(...) {
             
             sourceInput("source"),
             
-            tableOptions("table1"),
-            hr(),
+            tableOptions("table1")
             
-            fluidPage(
-                
-                style = "position: absolute; bottom: 15px; left: 0; right: 0;",
-                h5(
-                    style = "color: #004164;"
-                ),
-                p(
-                    a(
-                        href = "https://github.com/npechl",
-                        style = "color: #004164;",
-                        "Nikos Pechlivanis ",
-                        icon("github", lib = "font-awesome")
-                    )
-                ),
-                p(
-                    a(
-                        href = "https://github.com/natanast",
-                        style = "color: #004164;",
-                        "Natasa Anastasiadou ",
-                        icon("github", lib = "font-awesome")
-                    )
-                )
-            )
+            # fluidPage(
+            #     
+            #     style = "position: absolute; bottom: 15px; left: 0; right: 0;",
+            #     h5(
+            #         style = "color: #004164;"
+            #     ),
+            #     p(
+            #         a(
+            #             href = "https://github.com/npechl",
+            #             style = "color: #004164;",
+            #             "Nikos Pechlivanis ",
+            #             icon("github", lib = "font-awesome")
+            #         )
+            #     ),
+            #     p(
+            #         a(
+            #             href = "https://github.com/natanast",
+            #             style = "color: #004164;",
+            #             "Natasa Anastasiadou ",
+            #             icon("github", lib = "font-awesome")
+            #         )
+            #     )
+            # )
             
         ),
         
@@ -276,6 +289,15 @@ run_odyssey <- function(...) {
             session$keepAlive
         })
         
+        # Show modal automatically on app load
+        session$onFlushed(function(){
+            showModal(info_modal())
+        }, once = TRUE)
+        
+        # Also open modal when clicking the Info button
+        observeEvent(input$info_btn, {
+            showModal(info_modal())
+        })
 
     }
     
