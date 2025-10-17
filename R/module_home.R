@@ -1,4 +1,26 @@
 
+#' Home: Source Selection UI
+#' 
+#' This UI module displays inputs for selecting a data source, country, date range,
+#' and a button to trigger loading.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#'
+#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#'
+#' @export
+#'
+homeui <- function(id) {
+    ns <- NS(id)
+    
+    nav_panel(
+        title = tags$h6("Home", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        fluidPage(br(), uiOutput("home"))
+    )
+    
+}
+
+
 #' Home Tab UI Module
 #' 
 #' Generates the user interface for the Home tab of the Odyssey Shiny application.
@@ -12,6 +34,7 @@
 #' @export
 #' @importFrom utils URLencode
 hometextUi     <- function(id) {
+    
     moduleServer(id, function(input, output, session) {
         
         renderUI(

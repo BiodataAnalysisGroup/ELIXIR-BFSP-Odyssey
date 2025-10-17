@@ -1,3 +1,30 @@
+#' Sidebar: Source Selection UI
+#' 
+#' This UI module displays inputs for selecting a data source, country, date range,
+#' and a button to trigger loading.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#'
+#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#'
+#' @export
+#'
+mapui <- function(id) {
+    
+    nav_panel(
+        title = tags$h6("Map", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        fluidPage(
+            br(),
+            card(
+                full_screen = TRUE, fill = FALSE,
+                leafletOutput("map", height = "67em", width = "auto")
+            )
+        )
+    )
+    
+
+}
+
 
 
 #' Map tab
