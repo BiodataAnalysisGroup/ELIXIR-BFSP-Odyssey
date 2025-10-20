@@ -1,4 +1,61 @@
-
+#' Sidebar: Source Selection UI
+#' 
+#' This UI module displays inputs for selecting a data source, country, date range,
+#' and a button to trigger loading.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#'
+#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#'
+#' @export
+#'
+overviewui <- function(id) {
+    
+    nav_panel(
+        title = tags$h6("Overview", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        br(),
+        layout_column_wrap(
+            value_box(
+                title = "Number of observations",
+                value = textOutput("data_rows"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot1"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of tax divisions",
+                value = textOutput("tax_division"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot2"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of scientific names",
+                value = textOutput("names"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot3"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of isolation sources",
+                value = textOutput("isolation_source"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot4"),
+                full_screen = TRUE
+            )
+        ),
+        fluidPage(
+            br(),
+            card(
+                card_header("Taxonomy Tree"),
+                full_screen = TRUE, fill = FALSE,
+                card_body(echarts4rOutput("tree1", height = "35em", width = "auto"))
+            )
+        )
+    )
+    
+    
+}
 
 #' Overview Tab: Area Plot of Observations Over Time
 #'
