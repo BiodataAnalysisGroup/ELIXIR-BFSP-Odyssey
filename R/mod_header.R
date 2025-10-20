@@ -1,5 +1,4 @@
 
-
 #' Table: Source Selection UI
 #' 
 #' This UI module displays inputs for selecting a data source, country, date range,
@@ -11,7 +10,7 @@
 #'
 #' @export
 #'
-headerui <- function(id) {
+header_ui <- function(id) {
     
     ns <- NS(id)
     tagList(

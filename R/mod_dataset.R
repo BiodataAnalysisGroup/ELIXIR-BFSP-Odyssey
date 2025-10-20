@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-mod_data_server <- function(id) {
+data_server <- function(id) {
     moduleServer(id, function(input, output, session) {
         
         fetch_data <- eventReactive(input$go, {

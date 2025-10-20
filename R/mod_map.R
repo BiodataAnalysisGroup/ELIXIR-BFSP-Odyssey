@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-mapui <- function(id) {
+map_ui <- function(id) {
     
     nav_panel(
         title = tags$h6("Map", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
@@ -41,7 +41,7 @@ mapui <- function(id) {
 #'
 #' @export
 #' @importFrom utils URLencode
-mapServer      <- function(id, df) {
+map_server      <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderLeaflet({

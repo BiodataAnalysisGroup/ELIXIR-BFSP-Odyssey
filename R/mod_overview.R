@@ -9,7 +9,7 @@
 #'
 #' @export
 #'
-overviewui <- function(id) {
+overview_ui <- function(id) {
     
     nav_panel(
         title = tags$h6("Overview", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
@@ -69,7 +69,7 @@ overviewui <- function(id) {
 #' @return A Shiny output object rendering the echarts plot.
 #' 
 #' @export
-plotServer1    <- function(id, df) {
+plot_server1    <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         
@@ -112,7 +112,7 @@ plotServer1    <- function(id, df) {
 #' @param df data table
 #'
 #' @export
-plotServer2    <- function(id, df) {
+plot_server2    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -138,7 +138,7 @@ plotServer2    <- function(id, df) {
 #' @param df data table
 #'
 #' @export
-plotServer3    <- function(id, df) {
+plot_server3    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -176,7 +176,7 @@ plotServer3    <- function(id, df) {
 #' @param df data table
 #'
 #' @export
-plotServer4    <- function(id, df) {
+plot_server4    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -230,7 +230,7 @@ plotServer4    <- function(id, df) {
 #' @return A Shiny output object rendering a tree chart with taxonomic relationships.
 #'
 #' @export
-treeServer     <- function(id, df) {
+tree_server     <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({

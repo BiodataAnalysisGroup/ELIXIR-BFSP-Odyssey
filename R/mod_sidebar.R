@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-sourceInput    <- function(id) {
+source_ui <- function(id) {
     
     european_countries <- c("Greece", "Norway")
 
@@ -64,7 +64,7 @@ sourceInput    <- function(id) {
 #'
 #' @export
 #'
-tableOptions   <- function(id) {
+table_options_ui   <- function(id) {
     
     
     tagList(

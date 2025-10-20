@@ -1,5 +1,4 @@
 
-
 #' Table: Source Selection UI
 #' 
 #' This UI module displays inputs for selecting a data source, country, date range,
@@ -11,7 +10,8 @@
 #'
 #' @export
 #'
-tableui <- function(id) {
+table_ui <- function(id) {
+    ns <- NS(id)
     
     nav_panel(
         title = tags$h6("Table", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
@@ -40,7 +40,7 @@ tableui <- function(id) {
 #'
 #' @export
 #'
-datasetServer <- function(id, df) {
+dataset_server <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         filtered <- reactive({
@@ -107,7 +107,7 @@ datasetServer <- function(id, df) {
 #'
 #' @importFrom htmltools tags
 #' 
-tableServer    <- function(id, df) {
+table_server    <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         
@@ -161,7 +161,7 @@ tableServer    <- function(id, df) {
 #' @export
 #'
 #' @importFrom scales comma
-textServer1    <- function(id, df) {
+text_server1    <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         
@@ -183,7 +183,7 @@ textServer1    <- function(id, df) {
 #' @return A numeric value representing the count of unique \code{tax_division2} entries
 #'
 #' @export
-textServer2    <- function(id, df) {
+text_server2    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderText({ df()$tax_division2 |> unique() |> length() })
@@ -203,7 +203,7 @@ textServer2    <- function(id, df) {
 #' @return A numeric value representing the count of unique \code{scientific_name} entries
 #' 
 #' @export
-textServer3    <- function(id, df) {
+text_server3    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderText({ df()$scientific_name |> unique() |> length() })
@@ -222,7 +222,7 @@ textServer3    <- function(id, df) {
 #' @return A numeric value representing the count of unique \code{isolation_source} entries
 #'
 #' @export
-textServer4    <- function(id, df) {
+text_server4    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderText({ df()$isolation_source |> unique() |> length() })
@@ -243,7 +243,7 @@ textServer4    <- function(id, df) {
 #'
 #' @export
 #' @importFrom utils write.csv
-downloadServer <- function(id, df) {
+download_server <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         

@@ -12,7 +12,7 @@
 #' @export
 #'
 # 
-info_modal <- function() {
+info_ui <- function() {
     
     modalDialog(
         size = "xl",
@@ -23,7 +23,7 @@ info_modal <- function() {
         card(
             title = "Welcome",
             h4("About the project", style = "color:#2b5769;"),
-            h6("Odyssey is an interactive Shiny application designed facilitate the exploration of molecular biodiversity.", style = "color:#386375;"),
+            h6("Odyssey is an interactive Shiny application designed to facilitate the exploration of molecular biodiversity.", style = "color:#386375;"),
             style = "margin-bottom: 0.75rem; border-radius: 0.75rem; 
                      box-shadow: 2px 2px 10px rgba(0,0,0,0.1); 
                      padding: 0.75rem;"

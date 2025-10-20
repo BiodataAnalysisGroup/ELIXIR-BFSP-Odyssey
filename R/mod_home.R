@@ -10,7 +10,8 @@
 #'
 #' @export
 #'
-homeui <- function(id) {
+home_ui <- function(id) {
+    
     ns <- NS(id)
     
     nav_panel(
@@ -33,7 +34,7 @@ homeui <- function(id) {
 #'
 #' @export
 #' @importFrom utils URLencode
-hometextUi     <- function(id) {
+home_server <- function(id) {
     
     moduleServer(id, function(input, output, session) {
         
