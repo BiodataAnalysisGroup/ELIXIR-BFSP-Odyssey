@@ -1,11 +1,12 @@
-#' Sidebar: Source Selection UI
+
+#' UI Module: Overview Tab
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
+#' Generates the user interface for the "Overview" tab of the Odyssey Shiny application.
+#' This tab displays summary value boxes for key dataset statistics.
 #'
-#' @param id Character string used for namespacing the input IDs in the UI module.
+#'#' @param id Character string used to namespace the input/output IDs in the UI module.
 #'
-#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#' @return A \code{nav_panel} UI element containing the overview value boxes and taxonomy tree.
 #'
 #' @export
 #'
@@ -57,7 +58,7 @@ overview_ui <- function(id) {
     
 }
 
-#' Overview Tab: Area Plot of Observations Over Time
+#' Server Module: Overview Tab - Area Plot of Observations Over Time
 #'
 #' Server module that generates an interactive area chart displaying the number of observations 
 #' (based on `first_public` dates) over time, grouped by year and month. 
@@ -106,7 +107,7 @@ plot_server1    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Bar plot of Tax Divisions
+#' Server Module: Overview Tab - Bar plot of Tax Divisions
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -132,7 +133,7 @@ plot_server2    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Wordcloud of Scientific Names
+#' Server Module: Overview Tab - Wordcloud of Scientific Names
 #'
 #' @param id numeric identifier
 #' @param df data table
@@ -170,7 +171,7 @@ plot_server3    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Pie Chart with the Isolation Source
+#' Server Module: Overview Tab - Pie Chart with the Isolation Source
 #'
 #' @param id numeric identifier
 #' @param df data table

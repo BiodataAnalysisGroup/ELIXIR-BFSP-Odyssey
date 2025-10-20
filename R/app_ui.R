@@ -34,7 +34,7 @@ app_ui <- function(request) {
         navset_underline(
             
             # Home tab ----------
-            home_ui("Home"),
+            home_ui("home"),
 
             # Overview tab ----------
             overview_ui("Overview"),
@@ -57,9 +57,12 @@ app_ui <- function(request) {
         
         # Keep session alive ----------
         tags$script(
-            "var timeout = setInterval(function(){
-        Shiny.onInputChange('keepAlive', new Date().getTime());
-      }, 15000);"
+            "var timeout = setInterval(
+            function(){
+            Shiny.onInputChange('keepAlive', new Date().getTime());
+            }, 
+            15000
+            );"
         )
     )
 }

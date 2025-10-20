@@ -1,13 +1,15 @@
 
-#' Home: Source Selection UI
+#' UI Module: Home tab
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
+#' A Shiny UI module that defines the "Home" tab of the Odyssey app interface.
+#' It displays introductory content, such as app information and
+#' welcome text.
 #'
-#' @param id Character string used for namespacing the input IDs in the UI module.
+#' @param id A character string used to specify the module namespace.
 #'
-#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#' @return A Shiny \code{nav_panel} containing the "Home" section layout.
 #'
+#' 
 #' @export
 #'
 home_ui <- function(id) {
@@ -22,15 +24,15 @@ home_ui <- function(id) {
 }
 
 
-#' Home Tab UI Module
+#'  Server Module: Home Tab 
 #' 
-#' Generates the user interface for the Home tab of the Odyssey Shiny application.
+#' Defines the server logic for the Home tab of the Odyssey Shiny application.
 #' This tab includes a welcome message, project description, intended audience, methodology,
 #' contribution guidelines, and licensing information.
 #'
-#' @param id Character string specifying the module namespace identifier
+#' @param id Character string specifying the module namespace identifier.
 #' 
-#' @return A Shiny UI element containing HTML content to be rendered in the Home tab.
+#' @return This function is called for its side effects to render UI output.
 #'
 #' @export
 #' @importFrom utils URLencode

@@ -1,12 +1,17 @@
 
-#' Table: Source Selection UI
+#' UI Module: Header 
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
+#' A Shiny UI module that displays the application header, including the title,
+#' GitHub repository link, and an info button.
 #'
-#' @param id Character string used for namespacing the input IDs in the UI module.
+#' @param id A character string used to specify the module namespace.
 #'
-#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#' @return A \code{tagList} containing the header UI elements (title, GitHub link, and info button).
+#'
+#' @details
+#' This module defines the top section of the Odyssey Shiny app, featuring a
+#' styled title and toolbar with quick access to the GitHub repository and
+#' an information modal.
 #'
 #' @export
 #'

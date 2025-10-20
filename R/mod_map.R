@@ -1,7 +1,8 @@
-#' Sidebar: Source Selection UI
+
+#' UI Module: Map Tab 
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
+#' Defines the user interface for the Map tab of the Odyssey Shiny application.
+#' This tab displays an interactive Leaflet map that visualizes molecular biodiversity data.
 #'
 #' @param id Character string used for namespacing the input IDs in the UI module.
 #'
@@ -10,6 +11,8 @@
 #' @export
 #'
 map_ui <- function(id) {
+    
+    ns <- NS(id)
     
     nav_panel(
         title = tags$h6("Map", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
@@ -27,12 +30,13 @@ map_ui <- function(id) {
 
 
 
-#' Map tab
+#' Server Module: Map tab
 #'
-#' A Shiny server module that renders an interactive leaflet map showing
-#' the locations of samples. Points are clustered and include 
-#' popups with metadata (accession, taxonomic division, scientific name).
-#' 
+#' Server logic for the Map tab of the Odyssey app.
+#' This module renders an interactive leaflet map displaying 
+#' sample collection locations. Points are clustered and popups 
+#' include sample metadata such as accession number, taxonomic 
+#' division, and scientific name.
 #' 
 #' @param id Character string specifying the module namespace identifier.
 #' @param df A reactive \code{data.table} containing sequence records. 
