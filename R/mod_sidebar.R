@@ -1,17 +1,20 @@
 
 
-#' Sidebar: Source Selection UI
+#' UI Module: Sidebar - Source Selection
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
-#'
+#' Generates the sidebar user interface for selecting data sources and filtering options
+#' This module allows users to choose the input source,
+#' select a country, define a date range, and trigger data loading.
+#' 
 #' @param id Character string used for namespacing the input IDs in the UI module.
 #'
 #' @return A \code{tagList} with UI elements for selecting the data source and filters.
 #'
 #' @export
 #'
-sourceInput    <- function(id) {
+source_ui <- function(id) {
+    
+    ns <- NS(id)
     
     european_countries <- c("Greece", "Norway")
 
@@ -54,7 +57,7 @@ sourceInput    <- function(id) {
 }
 
 
-#' Sidebar: Table Options UI
+#' UI Module: Sidebar - Table Options
 #'
 #' This UI module displays checkboxes to show filters and group data by selected categories.
 #'
@@ -64,8 +67,9 @@ sourceInput    <- function(id) {
 #'
 #' @export
 #'
-tableOptions   <- function(id) {
+table_options_ui   <- function(id) {
     
+    ns <- NS(id)
     
     tagList(
         

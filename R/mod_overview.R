@@ -1,15 +1,16 @@
-#' Sidebar: Source Selection UI
+
+#' UI Module: Overview Tab
 #' 
-#' This UI module displays inputs for selecting a data source, country, date range,
-#' and a button to trigger loading.
+#' Generates the user interface for the "Overview" tab of the Odyssey Shiny application.
+#' This tab displays summary value boxes for key dataset statistics.
 #'
-#' @param id Character string used for namespacing the input IDs in the UI module.
+#'#' @param id Character string used to namespace the input/output IDs in the UI module.
 #'
-#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#' @return A \code{nav_panel} UI element containing the overview value boxes and taxonomy tree.
 #'
 #' @export
 #'
-overviewui <- function(id) {
+overview_ui <- function(id) {
     
     nav_panel(
         title = tags$h6("Overview", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
@@ -57,7 +58,7 @@ overviewui <- function(id) {
     
 }
 
-#' Overview Tab: Area Plot of Observations Over Time
+#' Server Module: Overview Tab - Area Plot of Observations Over Time
 #'
 #' Server module that generates an interactive area chart displaying the number of observations 
 #' (based on `first_public` dates) over time, grouped by year and month. 
@@ -69,7 +70,7 @@ overviewui <- function(id) {
 #' @return A Shiny output object rendering the echarts plot.
 #' 
 #' @export
-plotServer1    <- function(id, df) {
+plot_server1    <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         
@@ -106,13 +107,13 @@ plotServer1    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Bar plot of Tax Divisions
+#' Server Module: Overview Tab - Bar plot of Tax Divisions
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer2    <- function(id, df) {
+plot_server2    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -132,13 +133,13 @@ plotServer2    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Wordcloud of Scientific Names
+#' Server Module: Overview Tab - Wordcloud of Scientific Names
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer3    <- function(id, df) {
+plot_server3    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -170,13 +171,13 @@ plotServer3    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Pie Chart with the Isolation Source
+#' Server Module: Overview Tab - Pie Chart with the Isolation Source
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer4    <- function(id, df) {
+plot_server4    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -230,7 +231,7 @@ plotServer4    <- function(id, df) {
 #' @return A Shiny output object rendering a tree chart with taxonomic relationships.
 #'
 #' @export
-treeServer     <- function(id, df) {
+tree_server     <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
