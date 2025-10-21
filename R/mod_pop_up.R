@@ -1,5 +1,5 @@
 
-#' Display Instructions Modal for the App
+#' UI Module: Display Instructions Pop up for the App
 #'
 #' This function creates a reusable modal dialog in Shiny that provides users
 #' with instructions on how to use the app. It includes a welcome message, 
