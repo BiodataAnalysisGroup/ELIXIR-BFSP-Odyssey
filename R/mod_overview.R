@@ -1,6 +1,64 @@
 
+#' UI Module: Overview Tab
+#' 
+#' Generates the user interface for the "Overview" tab of the Odyssey Shiny application.
+#' This tab displays summary value boxes for key dataset statistics.
+#'
+#'#' @param id Character string used to namespace the input/output IDs in the UI module.
+#'
+#' @return A \code{nav_panel} UI element containing the overview value boxes and taxonomy tree.
+#'
+#' @export
+#'
+overview_ui <- function(id) {
+    
+    nav_panel(
+        title = tags$h6("Overview", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        br(),
+        layout_column_wrap(
+            value_box(
+                title = "Number of observations",
+                value = textOutput("data_rows"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot1"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of tax divisions",
+                value = textOutput("tax_division"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot2"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of scientific names",
+                value = textOutput("names"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot3"),
+                full_screen = TRUE
+            ),
+            value_box(
+                title = "Number of isolation sources",
+                value = textOutput("isolation_source"),
+                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+                showcase = echarts4rOutput("plot4"),
+                full_screen = TRUE
+            )
+        ),
+        fluidPage(
+            br(),
+            card(
+                card_header("Taxonomy Tree"),
+                full_screen = TRUE, fill = FALSE,
+                card_body(echarts4rOutput("tree1", height = "35em", width = "auto"))
+            )
+        )
+    )
+    
+    
+}
 
-#' Overview Tab: Area Plot of Observations Over Time
+#' Server Module: Overview Tab - Area Plot of Observations Over Time
 #'
 #' Server module that generates an interactive area chart displaying the number of observations 
 #' (based on `first_public` dates) over time, grouped by year and month. 
@@ -12,7 +70,7 @@
 #' @return A Shiny output object rendering the echarts plot.
 #' 
 #' @export
-plotServer1    <- function(id, df) {
+plot_server1    <- function(id, df) {
     
     moduleServer(id, function(input, output, session) {
         
@@ -49,13 +107,13 @@ plotServer1    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Bar plot of Tax Divisions
+#' Server Module: Overview Tab - Bar plot of Tax Divisions
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer2    <- function(id, df) {
+plot_server2    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -75,13 +133,13 @@ plotServer2    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Wordcloud of Scientific Names
+#' Server Module: Overview Tab - Wordcloud of Scientific Names
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer3    <- function(id, df) {
+plot_server3    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -113,13 +171,13 @@ plotServer3    <- function(id, df) {
     })
 }
 
-#' Overview Tab: Pie Chart with the Isolation Source
+#' Server Module: Overview Tab - Pie Chart with the Isolation Source
 #'
 #' @param id numeric identifier
 #' @param df data table
 #'
 #' @export
-plotServer4    <- function(id, df) {
+plot_server4    <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({
@@ -173,7 +231,7 @@ plotServer4    <- function(id, df) {
 #' @return A Shiny output object rendering a tree chart with taxonomic relationships.
 #'
 #' @export
-treeServer     <- function(id, df) {
+tree_server     <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({

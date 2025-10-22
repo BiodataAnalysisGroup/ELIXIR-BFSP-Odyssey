@@ -1,11 +1,42 @@
 
-
-#' Map tab
-#'
-#' A Shiny server module that renders an interactive leaflet map showing
-#' the locations of samples. Points are clustered and include 
-#' popups with metadata (accession, taxonomic division, scientific name).
+#' UI Module: Map Tab 
 #' 
+#' Defines the user interface for the Map tab of the Odyssey Shiny application.
+#' This tab displays an interactive Leaflet map that visualizes molecular biodiversity data.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#'
+#' @return A \code{tagList} with UI elements for selecting the data source and filters.
+#'
+#' @export
+#'
+map_ui <- function(id) {
+    
+    ns <- NS(id)
+    
+    nav_panel(
+        title = tags$h6("Map", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        fluidPage(
+            br(),
+            card(
+                full_screen = TRUE, fill = FALSE,
+                leafletOutput("map", height = "67em", width = "auto")
+            )
+        )
+    )
+    
+
+}
+
+
+
+#' Server Module: Map tab
+#'
+#' Server logic for the Map tab of the Odyssey app.
+#' This module renders an interactive leaflet map displaying 
+#' sample collection locations. Points are clustered and popups 
+#' include sample metadata such as accession number, taxonomic 
+#' division, and scientific name.
 #' 
 #' @param id Character string specifying the module namespace identifier.
 #' @param df A reactive \code{data.table} containing sequence records. 
@@ -14,7 +45,7 @@
 #'
 #' @export
 #' @importFrom utils URLencode
-mapServer      <- function(id, df) {
+map_server      <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         renderLeaflet({
