@@ -2,18 +2,18 @@
 % Please edit documentation in R/mod_home.R
 \name{home_server}
 \alias{home_server}
-\title{Home Tab UI Module}
+\title{Server Module: Home Tab}
 \usage{
 home_server(id)
 }
 \arguments{
-\item{id}{Character string specifying the module namespace identifier}
+\item{id}{Character string specifying the module namespace identifier.}
 }
 \value{
-A Shiny UI element containing HTML content to be rendered in the Home tab.
+This function is called for its side effects to render UI output.
 }
 \description{
-Generates the user interface for the Home tab of the Odyssey Shiny application.
+Defines the server logic for the Home tab of the Odyssey Shiny application.
 This tab includes a welcome message, project description, intended audience, methodology,
 contribution guidelines, and licensing information.
 }

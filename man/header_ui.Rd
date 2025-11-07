@@ -2,17 +2,22 @@
 % Please edit documentation in R/mod_header.R
 \name{header_ui}
 \alias{header_ui}
-\title{Table: Source Selection UI}
+\title{UI Module: Header}
 \usage{
 header_ui(id)
 }
 \arguments{
-\item{id}{Character string used for namespacing the input IDs in the UI module.}
+\item{id}{A character string used to specify the module namespace.}
 }
 \value{
-A \code{tagList} with UI elements for selecting the data source and filters.
+A \code{tagList} containing the header UI elements (title, GitHub link, and info button).
 }
 \description{
-This UI module displays inputs for selecting a data source, country, date range,
-and a button to trigger loading.
+A Shiny UI module that displays the application header, including the title,
+GitHub repository link, and an info button.
+}
+\details{
+This module defines the top section of the Odyssey Shiny app, featuring a
+styled title and toolbar with quick access to the GitHub repository and
+an information modal.
 }

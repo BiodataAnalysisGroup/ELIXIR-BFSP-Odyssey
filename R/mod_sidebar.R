@@ -1,5 +1,4 @@
 
-
 #' UI Module: Sidebar - Source Selection
 #' 
 #' Generates the sidebar user interface for selecting data sources and filtering options

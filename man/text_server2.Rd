@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{text_server2}
 \alias{text_server2}
-\title{Table Tab: Number of Taxonomic Divisions}
+\title{Server Module: Table Tab - Number of Unique Taxonomic Divisions}
 \usage{
 text_server2(id, df)
 }
@@ -15,6 +15,6 @@ text_server2(id, df)
 A numeric value representing the count of unique \code{tax_division2} entries
 }
 \description{
-A Shiny server module that returns the number of unique taxonomic divisions
+This server module returns the number of unique taxonomic divisions
 in the dataset, typically used in the Table Tab to summarize diversity.
 }

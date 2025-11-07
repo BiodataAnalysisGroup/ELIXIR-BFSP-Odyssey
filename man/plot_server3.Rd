@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_overview.R
 \name{plot_server3}
 \alias{plot_server3}
-\title{Overview Tab: Wordcloud of Scientific Names}
+\title{Server Module: Overview Tab - Wordcloud of Scientific Names}
 \usage{
 plot_server3(id, df)
 }
@@ -12,5 +12,5 @@ plot_server3(id, df)
 \item{df}{data table}
 }
 \description{
-Overview Tab: Wordcloud of Scientific Names
+Server Module: Overview Tab - Wordcloud of Scientific Names
 }

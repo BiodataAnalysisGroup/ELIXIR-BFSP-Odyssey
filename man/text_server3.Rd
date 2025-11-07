@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{text_server3}
 \alias{text_server3}
-\title{Table Tab: Number of Unique Scientific Names}
+\title{Server Module: Table Tab - Number of Unique Scientific Names}
 \usage{
 text_server3(id, df)
 }
@@ -15,6 +15,6 @@ text_server3(id, df)
 A numeric value representing the count of unique \code{scientific_name} entries
 }
 \description{
-A Shiny server module that returns the number of unique scientific names
+This server module returns the number of unique scientific names
 in the dataset, typically used in the Table Tab to summarize species diversity.
 }

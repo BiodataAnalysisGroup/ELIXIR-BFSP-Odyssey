@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_pop_up.R
 \name{info_ui}
 \alias{info_ui}
-\title{Display Instructions Modal for the App}
+\title{UI Module: Display Instructions Pop up for the App}
 \usage{
 info_ui()
 }
