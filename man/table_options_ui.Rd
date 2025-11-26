@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_sidebar.R
 \name{table_options_ui}
 \alias{table_options_ui}
-\title{Sidebar: Table Options UI}
+\title{UI Module: Sidebar - Table Options}
 \usage{
 table_options_ui(id)
 }

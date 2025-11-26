@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{dataset_server}
 \alias{dataset_server}
-\title{Table Tab: Data Processing}
+\title{Server Module: Table Tab - Dataset Processing}
 \usage{
 dataset_server(id, df)
 }
@@ -17,7 +17,7 @@ taxonomic information, split tags, and parsed coordinates, ready for use in tabl
 and visualizations.
 }
 \description{
-A Shiny server module that preprocesses the ENA dataset for use in the
-table and other tabs. It standardizes taxonomic divisions, extracts tags,
-parses coordinates, and orders rows by publication date.
+This server module preprocesses the ENA dataset for use across the app.
+It standardizes taxonomic divisions, splits tags into multiple columns,
+parses coordinates from text fields, and orders records by publication date.
 }

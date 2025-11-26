@@ -26,7 +26,7 @@ app_ui <- function(request) {
         sidebar = sidebar(
             
             source_ui("source"),
-            table_options_ui("table1")
+            # table_options_ui("table1")
             
         ),
         
@@ -60,7 +60,7 @@ app_ui <- function(request) {
             "var timeout = setInterval(
             function(){
             Shiny.onInputChange('keepAlive', new Date().getTime());
-            }, 
+            },
             15000
             );"
         )

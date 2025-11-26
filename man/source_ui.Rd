@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_sidebar.R
 \name{source_ui}
 \alias{source_ui}
-\title{Sidebar: Source Selection UI}
+\title{UI Module: Sidebar - Source Selection}
 \usage{
 source_ui(id)
 }
@@ -13,6 +13,7 @@ source_ui(id)
 A \code{tagList} with UI elements for selecting the data source and filters.
 }
 \description{
-This UI module displays inputs for selecting a data source, country, date range,
-and a button to trigger loading.
+Generates the sidebar user interface for selecting data sources and filtering options
+This module allows users to choose the input source,
+select a country, define a date range, and trigger data loading.
 }

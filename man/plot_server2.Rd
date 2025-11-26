@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_overview.R
 \name{plot_server2}
 \alias{plot_server2}
-\title{Overview Tab: Bar plot of Tax Divisions}
+\title{Server Module: Overview Tab - Bar plot of Tax Divisions}
 \usage{
 plot_server2(id, df)
 }
@@ -12,5 +12,5 @@ plot_server2(id, df)
 \item{df}{data table}
 }
 \description{
-Overview Tab: Bar plot of Tax Divisions
+Server Module: Overview Tab - Bar plot of Tax Divisions
 }

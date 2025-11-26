@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{download_server}
 \alias{download_server}
-\title{Table Tab: Download Dataset}
+\title{Server Module: Table Tab - Download Dataset}
 \usage{
 download_server(id, df)
 }
@@ -15,6 +15,6 @@ download_server(id, df)
 A Shiny download handler that exports \code{data.table} as a CSV file
 }
 \description{
-A Shiny server module that provides a download handler for the dataset,
+This server module provides a download handler for the dataset,
 allowing users to export the current data as a CSV file.
 }
