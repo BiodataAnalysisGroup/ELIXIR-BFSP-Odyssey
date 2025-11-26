@@ -6,13 +6,13 @@
 \usage{
 overview_ui(id)
 }
+\arguments{
+\item{id}{Character string used to namespace the input/output IDs in the UI module.}
+}
 \value{
 A \code{nav_panel} UI element containing the overview value boxes and taxonomy tree.
 }
 \description{
 Generates the user interface for the "Overview" tab of the Odyssey Shiny application.
 This tab displays summary value boxes for key dataset statistics.
-}
-\details{
-#' @param id Character string used to namespace the input/output IDs in the UI module.
 }
