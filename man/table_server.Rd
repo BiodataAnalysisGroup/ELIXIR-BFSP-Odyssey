@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{table_server}
 \alias{table_server}
-\title{Table Tab: Server Module}
+\title{Server Module: Table Tab - Table Rendering}
 \usage{
 table_server(id, df)
 }
@@ -15,7 +15,7 @@ table_server(id, df)
 A \code{reactable} table rendered in the UI.
 }
 \description{
-A Shiny server module that renders an interactive \code{reactable} table
-displaying sequence data. The table supports grouping, filtering, pagination,
-and clickable accession links.
+This server module renders an interactive \code{reactable} table displaying
+processed sequence data. The table supports grouping, filtering, pagination,
+and clickable accession links to the ENA browser.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_map.R
 \name{map_server}
 \alias{map_server}
-\title{Map tab}
+\title{Server Module: Map tab}
 \usage{
 map_server(id, df)
 }
@@ -15,7 +15,9 @@ map_server(id, df)
 A \code{leaflet} map rendered in the UI.
 }
 \description{
-A Shiny server module that renders an interactive leaflet map showing
-the locations of samples. Points are clustered and include
-popups with metadata (accession, taxonomic division, scientific name).
+Server logic for the Map tab of the Odyssey app.
+This module renders an interactive leaflet map displaying
+sample collection locations. Points are clustered and popups
+include sample metadata such as accession number, taxonomic
+division, and scientific name.
 }

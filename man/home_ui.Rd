@@ -2,17 +2,18 @@
 % Please edit documentation in R/mod_home.R
 \name{home_ui}
 \alias{home_ui}
-\title{Home: Source Selection UI}
+\title{UI Module: Home tab}
 \usage{
 home_ui(id)
 }
 \arguments{
-\item{id}{Character string used for namespacing the input IDs in the UI module.}
+\item{id}{A character string used to specify the module namespace.}
 }
 \value{
-A \code{tagList} with UI elements for selecting the data source and filters.
+A Shiny \code{nav_panel} containing the "Home" section layout.
 }
 \description{
-This UI module displays inputs for selecting a data source, country, date range,
-and a button to trigger loading.
+A Shiny UI module that defines the "Home" tab of the Odyssey app interface.
+It displays introductory content, such as app information and
+welcome text.
 }

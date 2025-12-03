@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_map.R
 \name{map_ui}
 \alias{map_ui}
-\title{Sidebar: Source Selection UI}
+\title{UI Module: Map Tab}
 \usage{
 map_ui(id)
 }
@@ -13,6 +13,6 @@ map_ui(id)
 A \code{tagList} with UI elements for selecting the data source and filters.
 }
 \description{
-This UI module displays inputs for selecting a data source, country, date range,
-and a button to trigger loading.
+Defines the user interface for the Map tab of the Odyssey Shiny application.
+This tab displays an interactive Leaflet map that visualizes molecular biodiversity data.
 }

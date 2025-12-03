@@ -53,3 +53,4 @@ rsconnect/
 /.quarto/
 .Rproj.user
 docs
+inst/doc

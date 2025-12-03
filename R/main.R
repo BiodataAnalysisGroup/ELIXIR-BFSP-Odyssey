@@ -21,11 +21,24 @@
 #' 
 run_odyssey <- function(...) {
     
+    # Register package www folder for Shiny resources (CRAN-safe placement)
+    shiny::addResourcePath(
+        prefix = "www",
+        directoryPath = system.file("www", package = "Odyssey")
+    )
+    
     suppressWarnings(
-        shinyApp(
+        shiny::shinyApp(
             ui = app_ui,
             server = app_server
         )
     )
+    
+    # suppressWarnings(
+    #     shinyApp(
+    #         ui = app_ui,
+    #         server = app_server
+    #     )
+    # )
     
 }

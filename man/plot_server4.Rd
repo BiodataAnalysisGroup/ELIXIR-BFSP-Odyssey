@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_overview.R
 \name{plot_server4}
 \alias{plot_server4}
-\title{Overview Tab: Pie Chart with the Isolation Source}
+\title{Server Module: Overview Tab - Pie Chart with the Isolation Source}
 \usage{
 plot_server4(id, df)
 }
@@ -12,5 +12,5 @@ plot_server4(id, df)
 \item{df}{data table}
 }
 \description{
-Overview Tab: Pie Chart with the Isolation Source
+Server Module: Overview Tab - Pie Chart with the Isolation Source
 }

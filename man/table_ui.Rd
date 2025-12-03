@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{table_ui}
 \alias{table_ui}
-\title{Table: Source Selection UI}
+\title{UI Module: Table Tab - Table Display}
 \usage{
 table_ui(id)
 }
@@ -10,9 +10,9 @@ table_ui(id)
 \item{id}{Character string used for namespacing the input IDs in the UI module.}
 }
 \value{
-A \code{tagList} with UI elements for selecting the data source and filters.
+A \code{nav_panel} containing the data table and download button.
 }
 \description{
-This UI module displays inputs for selecting a data source, country, date range,
-and a button to trigger loading.
+This UI module defines the table panel layout for displaying data in a reactive table
+and provides an option to download the results as a CSV file.
 }

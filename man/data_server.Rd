@@ -2,17 +2,22 @@
 % Please edit documentation in R/mod_dataset.R
 \name{data_server}
 \alias{data_server}
-\title{ENA Query}
+\title{Server Module: ENA Query}
 \usage{
 data_server(id)
 }
 \arguments{
-\item{id}{Character string for namespacing the module (used with \code{moduleServer}).}
+\item{id}{A character string used to specify the module namespace.}
 }
 \value{
 A reactive expression that returns a \code{data.table} of the downloaded data.
 }
 \description{
-This Shiny server module retrieves sequence data from the ENA database
+A Shiny server module that retrieves sequence data from the ENA (European Nucleotide Archive)
 based on user input for country and date range.
+}
+\details{
+This module sends a query to the ENA API using the provided filters (country and date range),
+retrieves the results in tabular format, and returns them as a reactive expression suitable for
+downstream use in other modules.
 }

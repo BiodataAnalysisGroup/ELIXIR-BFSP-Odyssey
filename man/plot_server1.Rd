@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_overview.R
 \name{plot_server1}
 \alias{plot_server1}
-\title{Overview Tab: Area Plot of Observations Over Time}
+\title{Server Module: Overview Tab - Area Plot of Observations Over Time}
 \usage{
 plot_server1(id, df)
 }

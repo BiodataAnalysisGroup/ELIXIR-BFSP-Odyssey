@@ -4,7 +4,7 @@
 #' Generates the user interface for the "Overview" tab of the Odyssey Shiny application.
 #' This tab displays summary value boxes for key dataset statistics.
 #'
-#'#' @param id Character string used to namespace the input/output IDs in the UI module.
+#' @param id Character string used to namespace the input/output IDs in the UI module.
 #'
 #' @return A \code{nav_panel} UI element containing the overview value boxes and taxonomy tree.
 #'
@@ -36,14 +36,14 @@ overview_ui <- function(id) {
                 theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
                 showcase = echarts4rOutput("plot3"),
                 full_screen = TRUE
-            ),
-            value_box(
-                title = "Number of isolation sources",
-                value = textOutput("isolation_source"),
-                theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
-                showcase = echarts4rOutput("plot4"),
-                full_screen = TRUE
             )
+            # value_box(
+            #     title = "Number of isolation sources",
+            #     value = textOutput("isolation_source"),
+            #     theme = value_box_theme(bg = "#e5e8ec", fg = "#064467"),
+            #     showcase = echarts4rOutput("plot4"),
+            #     full_screen = TRUE
+            # )
         ),
         fluidPage(
             br(),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{text_server1}
 \alias{text_server1}
-\title{Table Tab: Number of Rows}
+\title{Server Module: Table Tab - Row Count Display}
 \usage{
 text_server1(id, df)
 }
@@ -15,6 +15,7 @@ text_server1(id, df)
 A character string with the formatted number of rows
 }
 \description{
-A Shiny server module that returns the number of rows in the dataset.
-Typically used in the Table Tab to display the total number of observations.
+This server module returns a formatted text output displaying
+the number of rows (observations) in the reactive dataset.
+It is typically used in the Table tab to show the total count of records.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_table.R
 \name{text_server4}
 \alias{text_server4}
-\title{Table Tab: Number of Unique Isolation Sources}
+\title{Server Module: Table Tab - Number of Unique Isolation Sources}
 \usage{
 text_server4(id, df)
 }
