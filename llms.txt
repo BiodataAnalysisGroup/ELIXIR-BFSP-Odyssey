@@ -1,0 +1,120 @@
+# Odyssey ![Odyssey Logo](reference/figures/logo_nobg.png)
+
+Odyssey is an R shiny application for the exploration of Molecular
+Biodiversity in Greece and Norway.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Related publications](#related_publications)
+
+## Installation
+
+``` r
+# install.packages("remotes")
+remotes::install_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey")
+```
+
+## Usage
+
+``` r
+# library(Odyssey)
+Odyssey::run_odyssey()
+```
+
+## Contributing
+
+If you would like to contribute to this pipeline, please see the
+[Contribution
+Guidelines](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/CONTRIBUTING.md).
+
+## License
+
+This work, as a whole, is licensed under the [MIT
+license](https://github.com/npechl/MBioG/blob/main/LICENSE).
+
+The code contained in this website is simultaneously available under the
+MIT license; this means that you are free to use it in your own
+packages, as long as you cite the source.
+
+Please also refer to [CODE OF
+CONDUCT](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/CODE_OF_CONDUCT.md).
+
+## Related_Publications
+
+- N. Pechlivanis, A. Anastasiadou, A. Papageorgiou, E. Pafilis, and F.
+  Psomopoulos, “Odyssey: an Interactive R Shiny App Approach to explore
+  Molecular Biodiversity in Greece,” **23rd European Conference On
+  Computational Biology (ECCB24)**, Sep. 2024, doi:
+  [10.5281/ZENODO.14186452](https://zenodo.org/records/14186453).
+
+# Package index
+
+## All functions
+
+- [`app_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/app_server.md)
+  : Odyssey Shiny Application Server
+- [`app_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/app_ui.md)
+  : Odyssey Shiny Application UI
+- [`data_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/data_server.md)
+  : Server Module: ENA Query
+- [`dataset_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/dataset_server.md)
+  : Server Module: Table Tab - Dataset Processing
+- [`download_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/download_server.md)
+  : Server Module: Table Tab - Download Dataset
+- [`fetch_ena_data()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/fetch_ena_data.md)
+  : Helper function: ENA data retrieval
+- [`fetch_gbif_data()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/fetch_gbif_data.md)
+  : Helper function: GBIF data retrieval
+- [`header_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/header_ui.md)
+  : UI Module: Header
+- [`home_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/home_server.md)
+  : Server Module: Home Tab
+- [`home_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/home_ui.md)
+  : UI Module: Home tab
+- [`info_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/info_ui.md)
+  : UI Module: Display Instructions Pop up for the App
+- [`map_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/map_server.md)
+  : Server Module: Map tab
+- [`map_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/map_ui.md)
+  : UI Module: Map Tab
+- [`overview_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/overview_ui.md)
+  : UI Module: Overview Tab
+- [`plot_server1()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/plot_server1.md)
+  : Server Module: Overview Tab - Area Plot of Observations Over Time
+- [`plot_server2()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/plot_server2.md)
+  : Server Module: Overview Tab - Bar plot of Tax Divisions
+- [`plot_server3()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/plot_server3.md)
+  : Server Module: Overview Tab - Wordcloud of Scientific Names
+- [`plot_server4()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/plot_server4.md)
+  : Server Module: Overview Tab - Pie Chart with the Isolation Source
+- [`run_odyssey()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/run_odyssey.md)
+  : Run Odyssey Shiny Application
+- [`source_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/source_ui.md)
+  : UI Module: Sidebar - Source Selection
+- [`table_options_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/table_options_ui.md)
+  : UI Module: Sidebar - Table Options
+- [`table_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/table_server.md)
+  : Server Module: Table Tab - Table Rendering
+- [`table_ui()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/table_ui.md)
+  : UI Module: Table Tab - Table Display
+- [`text_server1()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/text_server1.md)
+  : Server Module: Table Tab - Row Count Display
+- [`text_server2()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/text_server2.md)
+  : Server Module: Table Tab - Number of Unique Taxonomic Divisions
+- [`text_server3()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/text_server3.md)
+  : Server Module: Table Tab - Number of Unique Scientific Names
+- [`text_server4()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/text_server4.md)
+  : Server Module: Table Tab - Number of Unique Isolation Sources
+- [`tree_server()`](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference/tree_server.md)
+  : Overview Tab: Tree Chart of Taxonomic Hierarchy
+
+# Articles
+
+### All vignettes
+
+- [Introduction to
+  Odyssey](https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/articles/get-started.md):
