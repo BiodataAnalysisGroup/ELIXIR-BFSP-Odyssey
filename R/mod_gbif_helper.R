@@ -26,6 +26,7 @@ fetch_gbif_data <- function(country, date_range) {
     res <- tryCatch(
         occ_search(
             country = country_code,
+            basisOfRecord = "MATERIAL_SAMPLE",
             eventDate = paste0(format(date_range[1], "%Y-%m-%d"), ",", format(date_range[2], "%Y-%m-%d")),
             limit = 100000
         ),
