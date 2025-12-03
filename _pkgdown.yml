@@ -1,4 +1,36 @@
 url: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/
 template:
   bootstrap: 5
+  extra_css: pkgdown-extra.css
+  logo: man/figures/logo_nobg.png
+  bslib:
+    base_font:
+      google: "Jost"        # your Shiny font
+    heading_font:
+      google: "Jost"
+    bg: "#F3F6FA"            # app background
+    fg: "#004164"            # main text
+    primary: "#004164"       # active links/buttons
+    secondary: "#BED4E2"     # secondary accent
+    link-color: "#004164"    # links
+    navbar-bg: "#F3F6FA"     # navbar background
+    navbar-light-color: "#004164"
+    navbar-light-hover-color: "#004164"
+
+navbar:
+  structure:
+    left:
+      - home
+      - get-started
+      - reference
+      - news
+  components:
+    get-started:
+      text: "Get Started"
+      href: articles/get-started.html
+    github:
+      icon: fa-github
+      href: https://github.com/BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey
+      aria-label: "GitHub repository"
+
 
