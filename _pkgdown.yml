@@ -24,6 +24,7 @@ navbar:
       - get-started
       - reference
       - news
+      - articles
   components:
     get-started:
       text: "Get Started"
