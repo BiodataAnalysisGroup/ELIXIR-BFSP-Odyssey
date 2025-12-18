@@ -2,8 +2,8 @@ Package: Odyssey
 Title: Interactive Data Discovery Tool for Exploring Biodiversity Data
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Nikos", "Pechlivanis", , "nikosp41@certh.gr", role = "cre"),
-    person("Natasa", "Anastasiadou", , "nanastasiadou@certh.gr", role = "aut")
+    person(given = "Nikos", family = "Pechlivanis", email = "npechlv@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0003-2502-612X")),
+    person(given = "Natasa", family = "Anastasiadou", email = "nanastasiadou@certh.gr", role = c("cre", "aut"), comment = c(ORCID = "0009-0003-2908-7656"))
      )
 Description: Odyssey is an interactive Shiny application designed as a data discovery tool 
              for exploring biodiversity.It provides dynamic visualizations, 
