@@ -3,7 +3,7 @@ pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   get-started: get-started.html
-last_built: 2025-12-03T13:27Z
+last_built: 2025-12-18T10:08Z
 urls:
   reference: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/reference
   article: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/articles
