@@ -140,7 +140,7 @@ dataset_server <- function(id, df) {
             
             data$tax_division2 <- ifelse(
                 data$source == "ENA",
-                sapply(data$tax_division2, function(x) {
+                sapply(data$tax_division, function(x) {
                     if (is.na(x) || x == "") {
                         "Unknown"
                     } else if (!is.null(tax_division_lookup[[x]])) {
