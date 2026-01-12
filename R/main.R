@@ -28,17 +28,10 @@ run_odyssey <- function(...) {
     )
     
     suppressWarnings(
-        shiny::shinyApp(
+        shinyApp(
             ui = app_ui,
             server = app_server
         )
     )
-    
-    # suppressWarnings(
-    #     shinyApp(
-    #         ui = app_ui,
-    #         server = app_server
-    #     )
-    # )
-    
+
 }
