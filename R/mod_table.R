@@ -15,12 +15,16 @@ table_ui <- function(id) {
     ns <- NS(id)
     
     nav_panel(
+        
         title = tags$h6("Table", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
+        
         fluidPage(
             br(),
             card(full_screen = TRUE, fill = TRUE, reactableOutput("table"))
         ),
+        
         downloadButton("download", "Download as CSV")
+        
     )
     
 }
@@ -92,14 +96,18 @@ table_ui <- function(id) {
 #         return(filtered)
 #     })
 # }
+
 dataset_server <- function(id, df) {
+    
     moduleServer(id, function(input, output, session) {
         
         filtered <- reactive({
+            
             data <- df()
             
             # If data is empty, return an empty data.table with expected columns
             if (nrow(data) == 0) {
+                
                 empty_cols <- c(
                     "accession", "first_public", "country", "altitude",
                     "host", "host_tax_id", "isolation_source",
@@ -109,9 +117,12 @@ dataset_server <- function(id, df) {
                     "location", "lat", "long",
                     "decimalLatitude", "decimalLongitude", "year"
                 )
+                
                 data <- data.table(matrix(ncol = length(empty_cols), nrow = 0))
                 setnames(data, empty_cols)
+                
                 return(data)
+                
             }
             
             # Ensure all expected columns exist
@@ -121,8 +132,11 @@ dataset_server <- function(id, df) {
                 "scientific_name", "tax_id", "topology",
                 "decimalLatitude", "decimalLongitude", "year"
             )
+            
             for (col in expected_cols) {
+                
                 if (!col %in% names(data)) data[[col]] <- NA
+        
             }
             
             # Fix tax divisions (ENA only, GBIF will be NA)
@@ -132,14 +146,11 @@ dataset_server <- function(id, df) {
                 "FUN" = "Fungi", "HUM" = "Homo sapiens", "ENV" = "Environment",
                 "ROD" = "Rodentia", "MUS" = "Mus", "PHG" = "Phage"
             )
-            # data$tax_division2 <- sapply(data$tax_division2, function(x) {
-            #     if (is.na(x) || x == "") "Unknown" else tax_division_lookup[[x]]
-            # })
-            # data$tax_division2 <- as.character(data$tax_division2)
-            # 
-            
+
             data$tax_division2 <- ifelse(
+                
                 data$source == "ENA",
+                
                 sapply(data$tax_division, function(x) {
                     if (is.na(x) || x == "") {
                         "Unknown"
@@ -149,7 +160,9 @@ dataset_server <- function(id, df) {
                         x
                     }
                 }),
+                
                 data$tax_division2  # keep GBIF values unchanged
+                
             )
             
             # Fix tags
@@ -162,12 +175,16 @@ dataset_server <- function(id, df) {
             
             # Lat/long
             if (!is.null(data$location) && any(!is.na(data$location))) {
+                
                 split_location <- str_match(data$location, "([0-9.]+) N ([0-9.]+) E")
                 data$lat <- as.numeric(split_location[, 2])
                 data$long <- as.numeric(split_location[, 3])
+                
             } else {
+                
                 data$lat <- data$decimalLatitude
                 data$long <- data$decimalLongitude
+                
             }
             
             # Order
@@ -182,6 +199,7 @@ dataset_server <- function(id, df) {
         
         return(filtered)
     })
+    
 }
 
 
@@ -328,7 +346,9 @@ table_server <- function(id, df) {
                         }
                     )
                 ),
-                filterable = TRUE,
+                
+                groupBy = input$group_by,
+                filterable = input$table_filter |> as.logical(),
                 paginationType = "jump",
                 defaultPageSize = 15,
                 showPageSizeOptions = TRUE,
