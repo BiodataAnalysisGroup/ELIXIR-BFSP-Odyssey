@@ -42,7 +42,7 @@
 
 ## Citation
 
-Pechlivanis N, Anastasiadou N (2025). *Odyssey: Interactive Data
+Pechlivanis N, Anastasiadou N (2026). *Odyssey: Interactive Data
 Discovery Tool for Exploring Biodiversity Data*. R package version
 0.0.0.9000,
 <https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/>.
@@ -50,7 +50,7 @@ Discovery Tool for Exploring Biodiversity Data*. R package version
     @Manual{,
       title = {Odyssey: Interactive Data Discovery Tool for Exploring Biodiversity Data},
       author = {Nikos Pechlivanis and Natasa Anastasiadou},
-      year = {2025},
+      year = {2026},
       note = {R package version 0.0.0.9000},
       url = {https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/},
     }

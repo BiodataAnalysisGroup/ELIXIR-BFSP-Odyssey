@@ -1,0 +1,9 @@
+# Publications
+
+## Publications
+
+- N. Pechlivanis, A. Anastasiadou, A. Papageorgiou, E. Pafilis, and F.
+  Psomopoulos, “Odyssey: an Interactive R Shiny App Approach to explore
+  Molecular Biodiversity in Greece,” **23rd European Conference On
+  Computational Biology (ECCB24)**, Sep. 2024, doi:
+  [10.5281/ZENODO.14186452](https://zenodo.org/records/14186453).
