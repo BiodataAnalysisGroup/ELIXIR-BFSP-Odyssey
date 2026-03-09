@@ -69,7 +69,12 @@ map_server      <- function(id, df) {
                     fillOpacity = 1,
                     
                     popup = ~paste0(
-                        "<b>Accession:</b> ", "<a href='https://www.ebi.ac.uk/ena/browser/view/", accession, "' target='_blank'>", accession, "</a><br>",
+                        "<b>Accession:</b> ",
+                        ifelse(
+                            df_map$source == "GBIF",
+                            paste0("<a href='https://www.gbif.org/occurrence/", accession, "' target='_blank'>", accession, "</a><br>"),
+                            paste0("<a href='https://www.ebi.ac.uk/ena/browser/view/", accession, "' target='_blank'>", accession, "</a><br>")
+                        ),
                         "<b>Tax Division:</b> ", tax_division2, "<br>",
                         "<b>Scientific Name:</b> ", scientific_name, "<br>"
                     )
