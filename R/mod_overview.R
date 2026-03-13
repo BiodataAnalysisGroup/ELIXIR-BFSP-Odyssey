@@ -13,13 +13,9 @@
 overview_ui <- function(id) {
     
     nav_panel(
-        
         title = tags$h6("Overview", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
-        
         br(),
-        
         layout_column_wrap(
-        
             value_box(
                 title = "Number of observations",
                 value = textOutput("data_rows"),
@@ -27,7 +23,6 @@ overview_ui <- function(id) {
                 showcase = echarts4rOutput("plot1"),
                 full_screen = TRUE
             ),
-            
             value_box(
                 title = "Number of tax divisions",
                 value = textOutput("tax_division"),
@@ -35,7 +30,6 @@ overview_ui <- function(id) {
                 showcase = echarts4rOutput("plot2"),
                 full_screen = TRUE
             ),
-            
             value_box(
                 title = "Number of scientific names",
                 value = textOutput("names"),
@@ -43,7 +37,6 @@ overview_ui <- function(id) {
                 showcase = echarts4rOutput("plot3"),
                 full_screen = TRUE
             )
-            
             # value_box(
             #     title = "Number of isolation sources",
             #     value = textOutput("isolation_source"),
@@ -52,7 +45,6 @@ overview_ui <- function(id) {
             #     full_screen = TRUE
             # )
         ),
-        
         fluidPage(
             br(),
             card(
@@ -122,7 +114,6 @@ plot_server1    <- function(id, df) {
 #'
 #' @export
 plot_server2    <- function(id, df) {
-    
     moduleServer(id, function(input, output, session) {
         
         renderEcharts4r({

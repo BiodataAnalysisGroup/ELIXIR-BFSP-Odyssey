@@ -20,8 +20,30 @@ app_server <- function(input, output, session) {
     
     df_raw <- data_server("source")
     df1 <- dataset_server("table1", df_raw)
+
+    output$table_tabs <- renderUI({
+        selected_sources <- input$`source-source_input`
+
+        if (is.null(selected_sources) || length(selected_sources) == 0) {
+            return(div("Select at least one data source and click Load Data."))
+        }
+
+        tabs <- list()
+
+        if ("ENA" %in% selected_sources) {
+            tabs <- c(tabs, list(nav_panel("ENA", reactableOutput("table_ena"))))
+        }
+
+        if ("GBIF" %in% selected_sources) {
+            tabs <- c(tabs, list(nav_panel("GBIF", reactableOutput("table_gbif"))))
+        }
+
+        do.call(navset_tab, tabs)
+    })
+
+    output$table_ena <- table_server("table_ena", df1, source = "ENA")
+    output$table_gbif <- table_server("table_gbif", df1, source = "GBIF")
     
-    output$table <- table_server("table1", df1)
     output$map <- map_server("map", df1)
 
     output$data_rows <- text_server1("table1", df1)

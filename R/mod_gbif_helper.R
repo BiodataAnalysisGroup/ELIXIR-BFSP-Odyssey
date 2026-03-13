@@ -1,10 +1,11 @@
 
 #' Helper function: GBIF data retrieval
 #'
-#' Retrieves occurrence data from GBIF based on country and date range.
+#' Retrieves occurrence data from GBIF based on country, date range, and basisOfRecord.
 #'
 #' @param country Character string specifying the country (e.g. "Greece", "Norway").
 #' @param date_range A Date vector of length 2 specifying start and end dates.
+#' @param basis_of_record Character vector of GBIF basisOfRecord values.
 #'
 #' @return A \code{data.table} containing GBIF occurrence data.
 #'
@@ -15,7 +16,7 @@
 #' @export
 #' @importFrom rgbif occ_search
 #'
-fetch_gbif_data <- function(country, date_range) {
+fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE") {
     
     country_code <- switch(country,
                            "Greece" = "GR",
@@ -23,26 +24,47 @@ fetch_gbif_data <- function(country, date_range) {
                            NULL
     )
     
-    res <- tryCatch(
-        occ_search(
-            country = country_code,
-            basisOfRecord = "MATERIAL_SAMPLE",
-            eventDate = paste0(format(date_range[1], "%Y-%m-%d"), ",", format(date_range[2], "%Y-%m-%d")),
-            limit = 100000
-        ),
-        error = function(e) NULL
-    )
-    
-    if (is.null(res) || is.null(res$data) || nrow(res$data) == 0) {
+    if (is.null(country_code)) {
         return(data.table())
     }
-    
-    df <- as.data.table(res$data)
+
+    if (length(basis_of_record) == 0) {
+        basis_of_record <- "MATERIAL_SAMPLE"
+    }
+
+    basis_of_record <- unique(basis_of_record)
+
+    results <- lapply(basis_of_record, function(basis) {
+        tryCatch(
+            occ_search(
+                country = country_code,
+                basisOfRecord = basis,
+                eventDate = paste0(format(date_range[1], "%Y-%m-%d"), ",", format(date_range[2], "%Y-%m-%d")),
+                limit = 100000
+            ),
+            error = function(e) NULL
+        )
+    })
+
+    dfs <- lapply(results, function(res) {
+        if (is.null(res) || is.null(res$data) || nrow(res$data) == 0) {
+            return(NULL)
+        }
+        as.data.table(res$data)
+    })
+
+    dfs <- Filter(Negate(is.null), dfs)
+
+    if (length(dfs) == 0) {
+        return(data.table())
+    }
+
+    df <- rbindlist(dfs, fill = TRUE, use.names = TRUE)
     
     # column creation
     cols_needed <- c("key", "scientificName", "eventDate", "country", "decimalLatitude",
                      "decimalLongitude", "kingdom", "phylum", "class", "order",
-                     "family", "genus", "species")
+                     "family", "genus", "species", "basisOfRecord")
     
     for (col in cols_needed) {
         if (!col %in% names(df)) df[, (col) := NA]
@@ -50,12 +72,19 @@ fetch_gbif_data <- function(country, date_range) {
     
     df <- df[, .(
         accession = as.character(key),
-        country,
+        country = as.character(country),
         first_public = as.Date(substr(eventDate, 1, 10)),
-        decimalLatitude,
-        decimalLongitude,
-        scientific_name = species,
-        tax_division2 = kingdom,
+        decimalLatitude = as.numeric(decimalLatitude),
+        decimalLongitude = as.numeric(decimalLongitude),
+        scientific_name = fifelse(!is.na(species) & species != "", as.character(species), as.character(scientificName)),
+        tax_division2 = as.character(kingdom),
+        phylum = as.character(phylum),
+        class = as.character(class),
+        order = as.character(get("order")),
+        family = as.character(family),
+        genus = as.character(genus),
+        species = as.character(species),
+        basis_of_record = as.character(basisOfRecord),
         host = NA_character_,
         host_tax_id = NA_character_
     )]
