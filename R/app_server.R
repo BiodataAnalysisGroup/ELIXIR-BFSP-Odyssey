@@ -21,6 +21,23 @@ app_server <- function(input, output, session) {
     df_raw <- data_server("source")
     df1 <- dataset_server("table1", df_raw)
 
+    df_raw_ena <- reactive({
+        data <- df_raw()
+        if (is.null(data) || nrow(data) == 0) return(data.table())
+        if (!"source" %in% names(data)) return(data.table())
+        data[toupper(trimws(as.character(source))) == "ENA", ]
+    })
+
+    df_raw_gbif <- reactive({
+        data <- df_raw()
+        if (is.null(data) || nrow(data) == 0) return(data.table())
+        if (!"source" %in% names(data)) return(data.table())
+        data[toupper(trimws(as.character(source))) == "GBIF", ]
+    })
+
+    df_ena <- dataset_server("table_ena_proc", df_raw_ena)
+    df_gbif <- dataset_server("table_gbif_proc", df_raw_gbif)
+
     output$table_tabs <- renderUI({
         selected_sources <- input$`source-source_input`
 
@@ -41,8 +58,8 @@ app_server <- function(input, output, session) {
         do.call(navset_tab, tabs)
     })
 
-    output$table_ena <- table_server("table_ena", df1, source = "ENA")
-    output$table_gbif <- table_server("table_gbif", df1, source = "GBIF")
+    output$table_ena <- table_server("table_ena", df_ena, source = "ENA")
+    output$table_gbif <- table_server("table_gbif", df_gbif, source = "GBIF")
     
     output$map <- map_server("map", df1)
 

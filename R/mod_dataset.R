@@ -26,7 +26,7 @@ data_server <- function(id) {
             
             if ("ENA" %in% selected_sources) {
                 ena_data <- fetch_ena_data(input$country, input$range)
-                if (nrow(ena_data) > 0 && !"source" %in% names(ena_data)) {
+                if (nrow(ena_data) > 0) {
                     ena_data[, source := "ENA"]
                 }
                 source_results <- c(source_results, list(ena_data))
@@ -38,7 +38,7 @@ data_server <- function(id) {
                     gbif_basis <- "MATERIAL_SAMPLE"
                 }
                 gbif_data <- fetch_gbif_data(input$country, input$range, gbif_basis)
-                if (nrow(gbif_data) > 0 && !"source" %in% names(gbif_data)) {
+                if (nrow(gbif_data) > 0) {
                     gbif_data[, source := "GBIF"]
                 }
                 source_results <- c(source_results, list(gbif_data))

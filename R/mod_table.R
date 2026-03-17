@@ -79,6 +79,9 @@ dataset_server <- function(id, df) {
             for (col in expected_cols) {
                 if (!col %in% names(data)) data[[col]] <- NA
             }
+
+            # Normalize source tagging (do not override assigned source)
+            data$source <- toupper(trimws(as.character(data$source)))
             
             # Fix tax divisions (ENA only, GBIF will be NA)
             tax_division_lookup <- list(
@@ -201,7 +204,8 @@ table_server <- function(id, df, source = c("ENA", "GBIF")) {
                 data$source <- NA_character_
             }
 
-            data <- data[data$source == source, ]
+            data$source <- toupper(trimws(as.character(data$source)))
+            data <- data[!is.na(data$source) & data$source == source, ]
 
             if (nrow(data) == 0) {
                 return(
