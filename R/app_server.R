@@ -118,7 +118,20 @@ app_server <- function(input, output, session) {
         if (fixed_n == 0) {
             return("All points use original coordinates")
         }
-        paste0(fixed_n, " points have estimated coordinates at Greece center")
+        if (!"coords_fixed_country" %in% names(data)) {
+            return(paste0(fixed_n, " points have estimated coordinates"))
+        }
+
+        fixed_data <- data[as.logical(coords_fixed) == TRUE, ]
+        if (nrow(fixed_data) == 0) {
+            return("All points use original coordinates")
+        }
+
+        by_country <- fixed_data[, .N, by = .(coords_fixed_country)]
+        by_country <- by_country[order(-N)]
+        parts <- paste0(by_country$N, " ", ifelse(is.na(by_country$coords_fixed_country) | by_country$coords_fixed_country == "", "Greece", by_country$coords_fixed_country))
+
+        paste0(fixed_n, " points have estimated coordinates (", paste(parts, collapse = ", "), ")")
     })
     
     df_raw <- data_server("source", area_bounds = selected_map_area)
@@ -171,7 +184,12 @@ app_server <- function(input, output, session) {
     output$table_ena <- table_server("table_ena", df_ena, source = "ENA", table_options = shared_table_options)
     output$table_gbif <- table_server("table_gbif", df_gbif, source = "GBIF", table_options = shared_table_options)
     
-    output$map <- map_server("map", df1, area_bounds = selected_map_area)
+    output$map <- map_server(
+        "map",
+        df1,
+        area_bounds = selected_map_area,
+        selected_country = reactive(input$`source-country`)
+    )
 
     output$data_rows <- text_server1("table1", df1)
     output$tax_division <- text_server2("table1", df1)

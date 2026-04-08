@@ -58,7 +58,7 @@ map_ui <- function(id) {
 #'
 #' @export
 #' @importFrom utils URLencode
-map_server      <- function(id, df, area_bounds = NULL) {
+map_server      <- function(id, df, area_bounds = NULL, selected_country = NULL) {
     moduleServer(id, function(input, output, session) {
         renderLeaflet({
             df_map <- tryCatch(df(), error = function(e) data.table())
@@ -75,6 +75,9 @@ map_server      <- function(id, df, area_bounds = NULL) {
             if (!"coords_fixed" %in% names(df_map)) {
                 df_map$coords_fixed <- FALSE
             }
+            if (!"coords_fixed_country" %in% names(df_map)) {
+                df_map$coords_fixed_country <- NA_character_
+            }
             df_map$coords_fixed <- as.logical(df_map$coords_fixed)
             df_map$coords_fixed[is.na(df_map$coords_fixed)] <- FALSE
 
@@ -87,9 +90,27 @@ map_server      <- function(id, df, area_bounds = NULL) {
                 selected_bounds <- area_bounds()
             }
 
+            country_value <- "Greece"
+            if (!is.null(selected_country)) {
+                current_country <- selected_country()
+                if (!is.null(current_country) && nzchar(trimws(as.character(current_country)))) {
+                    country_value <- trimws(as.character(current_country))
+                }
+            }
+
+            if (tolower(country_value) == "norway") {
+                view_lng <- 8.4689
+                view_lat <- 60.4720
+                view_zoom <- 5.5
+            } else {
+                view_lng <- 23.7275
+                view_lat <- 38.0000
+                view_zoom <- 6.5
+            }
+
             base_map <- leaflet() |>
                 addProviderTiles("CartoDB.Positron") |>
-                setView(23.7275, 38, zoom = 6.5) |>
+                setView(view_lng, view_lat, zoom = view_zoom) |>
                 leaflet.extras::addDrawToolbar(
                     targetGroup = "query_area",
                     polygonOptions = leaflet.extras::drawPolygonOptions(showArea = TRUE),
@@ -188,7 +209,9 @@ map_server      <- function(id, df, area_bounds = NULL) {
                             ),
                             "<b>Tax Division:</b> ", tax_division2, "<br>",
                             "<b>Scientific Name:</b> ", scientific_name, "<br>",
-                            "<b>Coordinates:</b> Estimated (placed at Greece center)<br>"
+                            "<b>Coordinates:</b> Estimated (placed at ",
+                            ifelse(is.na(coords_fixed_country) | coords_fixed_country == "", "Greece", coords_fixed_country),
+                            " center)<br>"
                         )
                     )
             }

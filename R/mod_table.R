@@ -61,7 +61,7 @@ dataset_server <- function(id, df) {
                     "tag", "tag1", "tag2", "tag3", "tag4", "tag5",
                     "location", "lat", "long",
                     "decimalLatitude", "decimalLongitude", "year", "source",
-                    "coords_fixed",
+                    "coords_fixed", "coords_fixed_country",
                     "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
                 )
                 data <- data.table(matrix(ncol = length(empty_cols), nrow = 0))
@@ -75,11 +75,21 @@ dataset_server <- function(id, df) {
                 "host", "host_tax_id", "isolation_source",
                 "scientific_name", "tax_id", "topology",
                 "decimalLatitude", "decimalLongitude", "year", "source",
-                "coords_fixed",
                 "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
             )
             for (col in expected_cols) {
                 if (!col %in% names(data)) data[[col]] <- NA
+            }
+            if (!"coords_fixed" %in% names(data)) {
+                data$coords_fixed <- FALSE
+            } else {
+                data$coords_fixed <- as.logical(data$coords_fixed)
+                data$coords_fixed[is.na(data$coords_fixed)] <- FALSE
+            }
+            if (!"coords_fixed_country" %in% names(data)) {
+                data$coords_fixed_country <- NA_character_
+            } else {
+                data$coords_fixed_country <- as.character(data$coords_fixed_country)
             }
 
             # Normalize source tagging (do not override assigned source)
@@ -130,8 +140,29 @@ dataset_server <- function(id, df) {
             # Mark records without original coordinates and place them at Greece center
             missing_coords <- is.na(data$lat) | is.na(data$long)
             data$coords_fixed <- missing_coords
-            data$lat[missing_coords] <- 39.0742
-            data$long[missing_coords] <- 21.8243
+            data$coords_fixed_country <- NA_character_
+
+            fallback_country <- trimws(tolower(as.character(data$country)))
+            fallback_country[is.na(fallback_country)] <- ""
+
+            is_norway <- missing_coords & fallback_country == "norway"
+            is_greece <- missing_coords & fallback_country == "greece"
+            is_other <- missing_coords & !is_norway & !is_greece
+
+            # Norway center
+            data$lat[is_norway] <- 60.4720
+            data$long[is_norway] <- 8.4689
+            data$coords_fixed_country[is_norway] <- "Norway"
+
+            # Greece center
+            data$lat[is_greece] <- 39.0742
+            data$long[is_greece] <- 21.8243
+            data$coords_fixed_country[is_greece] <- "Greece"
+
+            # Default fallback remains Greece when country is missing/other
+            data$lat[is_other] <- 39.0742
+            data$long[is_other] <- 21.8243
+            data$coords_fixed_country[is_other] <- "Greece"
             
             # Order
             if ("first_public" %in% names(data) && any(!is.na(data$first_public))) {
