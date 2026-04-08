@@ -106,8 +106,7 @@ table_options_ui   <- function(id) {
                 "Tax_division"   = "tax_division2",
                 "Scientific_name" = "scientific_name",
                 "Tag1"            = "tag1",
-                "Tag2"            = "tag2",
-                "Tag3"            = "tag3"
+                "Tag2"            = "tag2"
             )
         )
     )

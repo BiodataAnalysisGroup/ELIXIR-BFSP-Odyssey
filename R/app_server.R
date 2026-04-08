@@ -21,6 +21,13 @@ app_server <- function(input, output, session) {
     df_raw <- data_server("source")
     df1 <- dataset_server("table1", df_raw)
 
+    shared_table_options <- reactive({
+        list(
+            table_filter = input$`table_options-table_filter`,
+            group_by = input$`table_options-group_by`
+        )
+    })
+
     df_raw_ena <- reactive({
         data <- df_raw()
         if (is.null(data) || nrow(data) == 0) return(data.table())
@@ -58,8 +65,8 @@ app_server <- function(input, output, session) {
         do.call(navset_tab, tabs)
     })
 
-    output$table_ena <- table_server("table_ena", df_ena, source = "ENA")
-    output$table_gbif <- table_server("table_gbif", df_gbif, source = "GBIF")
+    output$table_ena <- table_server("table_ena", df_ena, source = "ENA", table_options = shared_table_options)
+    output$table_gbif <- table_server("table_gbif", df_gbif, source = "GBIF", table_options = shared_table_options)
     
     output$map <- map_server("map", df1)
 

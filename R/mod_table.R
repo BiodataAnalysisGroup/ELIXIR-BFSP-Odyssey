@@ -191,7 +191,7 @@ dataset_server <- function(id, df) {
 #         
 #     })
 # }
-table_server <- function(id, df, source = c("ENA", "GBIF")) {
+table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL) {
     source <- match.arg(source)
 
     moduleServer(id, function(input, output, session) {
@@ -222,7 +222,7 @@ table_server <- function(id, df, source = c("ENA", "GBIF")) {
                 "accession", "first_public", "country", "altitude",
                 "host", "host_tax_id", "isolation_source",
                 "scientific_name", "tax_id", "topology",
-                "tax_division2", "tag1", "tag2", "tag3", "keywords"
+                "tax_division2", "tag1", "tag2", "keywords"
             )
 
             gbif_cols <- c(
@@ -236,6 +236,22 @@ table_server <- function(id, df, source = c("ENA", "GBIF")) {
                 cols_to_show <- intersect(ena_cols, names(data))
             } else {
                 cols_to_show <- intersect(gbif_cols, names(data))
+            }
+
+            filterable_flag <- TRUE
+            group_by_cols <- NULL
+
+            if (!is.null(table_options)) {
+                opts <- table_options()
+                filterable_flag <- isTRUE(opts$table_filter)
+                selected_group_by <- opts$group_by
+                if (is.null(selected_group_by)) {
+                    selected_group_by <- character()
+                }
+                group_by_cols <- intersect(selected_group_by, cols_to_show)
+                if (length(group_by_cols) == 0) {
+                    group_by_cols <- NULL
+                }
             }
 
             accession_url <- if (source == "ENA") {
@@ -255,7 +271,8 @@ table_server <- function(id, df, source = c("ENA", "GBIF")) {
                         }
                     )
                 ),
-                filterable = TRUE,
+                filterable = filterable_flag,
+                groupBy = group_by_cols,
                 paginationType = "jump",
                 defaultPageSize = 15,
                 showPageSizeOptions = TRUE,
