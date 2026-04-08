@@ -61,6 +61,7 @@ dataset_server <- function(id, df) {
                     "tag", "tag1", "tag2", "tag3", "tag4", "tag5",
                     "location", "lat", "long",
                     "decimalLatitude", "decimalLongitude", "year", "source",
+                    "coords_fixed",
                     "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
                 )
                 data <- data.table(matrix(ncol = length(empty_cols), nrow = 0))
@@ -74,6 +75,7 @@ dataset_server <- function(id, df) {
                 "host", "host_tax_id", "isolation_source",
                 "scientific_name", "tax_id", "topology",
                 "decimalLatitude", "decimalLongitude", "year", "source",
+                "coords_fixed",
                 "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
             )
             for (col in expected_cols) {
@@ -124,6 +126,12 @@ dataset_server <- function(id, df) {
             data$long <- as.numeric(split_location[, 3])
             data$lat[is.na(data$lat)] <- data$decimalLatitude[is.na(data$lat)]
             data$long[is.na(data$long)] <- data$decimalLongitude[is.na(data$long)]
+
+            # Mark records without original coordinates and place them at Greece center
+            missing_coords <- is.na(data$lat) | is.na(data$long)
+            data$coords_fixed <- missing_coords
+            data$lat[missing_coords] <- 39.0742
+            data$long[missing_coords] <- 21.8243
             
             # Order
             if ("first_public" %in% names(data) && any(!is.na(data$first_public))) {

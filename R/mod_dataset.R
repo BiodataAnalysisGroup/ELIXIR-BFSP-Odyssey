@@ -15,7 +15,7 @@
 #'
 #' @export
 #'
-data_server <- function(id) {
+data_server <- function(id, area_bounds = NULL) {
     moduleServer(id, function(input, output, session) {
         
         fetch_data <- eventReactive(input$go, {
@@ -23,9 +23,14 @@ data_server <- function(id) {
             
             selected_sources <- input$source_input
             source_results <- list()
+            selected_bounds <- NULL
+
+            if (!is.null(area_bounds)) {
+                selected_bounds <- area_bounds()
+            }
             
             if ("ENA" %in% selected_sources) {
-                ena_data <- fetch_ena_data(input$country, input$range)
+                ena_data <- fetch_ena_data(input$country, input$range, area_bounds = selected_bounds)
                 if (nrow(ena_data) > 0) {
                     ena_data[, source := "ENA"]
                 }
@@ -37,7 +42,12 @@ data_server <- function(id) {
                 if (is.null(gbif_basis) || length(gbif_basis) == 0) {
                     gbif_basis <- "MATERIAL_SAMPLE"
                 }
-                gbif_data <- fetch_gbif_data(input$country, input$range, gbif_basis)
+                gbif_data <- fetch_gbif_data(
+                    input$country,
+                    input$range,
+                    gbif_basis,
+                    area_bounds = selected_bounds
+                )
                 if (nrow(gbif_data) > 0) {
                     gbif_data[, source := "GBIF"]
                 }

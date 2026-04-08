@@ -6,6 +6,7 @@
 #' @param country Character string specifying the country (e.g. "Greece", "Norway").
 #' @param date_range A Date vector of length 2 specifying start and end dates.
 #' @param basis_of_record Character vector of GBIF basisOfRecord values.
+#' @param area_bounds Optional list with `west`, `east`, `south`, and `north`.
 #'
 #' @return A \code{data.table} containing GBIF occurrence data.
 #'
@@ -16,7 +17,7 @@
 #' @export
 #' @importFrom rgbif occ_search
 #'
-fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE") {
+fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE", area_bounds = NULL) {
     
     country_code <- switch(country,
                            "Greece" = "GR",
@@ -33,6 +34,17 @@ fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAM
     }
 
     basis_of_record <- unique(basis_of_record)
+    geometry_wkt <- NULL
+
+    if (!is.null(area_bounds)) {
+        geometry_wkt <- sprintf(
+            "POLYGON((%1$.6f %3$.6f,%2$.6f %3$.6f,%2$.6f %4$.6f,%1$.6f %4$.6f,%1$.6f %3$.6f))",
+            area_bounds$west,
+            area_bounds$east,
+            area_bounds$south,
+            area_bounds$north
+        )
+    }
 
     results <- lapply(basis_of_record, function(basis) {
         tryCatch(
@@ -40,6 +52,7 @@ fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAM
                 country = country_code,
                 basisOfRecord = basis,
                 eventDate = paste0(format(date_range[1], "%Y-%m-%d"), ",", format(date_range[2], "%Y-%m-%d")),
+                geometry = geometry_wkt,
                 limit = 100000
             ),
             error = function(e) NULL
