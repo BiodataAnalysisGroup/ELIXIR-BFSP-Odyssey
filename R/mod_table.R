@@ -18,7 +18,7 @@ table_ui <- function(id) {
         title = tags$h6("Table", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
         fluidPage(
             br(),
-            card(full_screen = TRUE, fill = TRUE, reactableOutput("table"))
+            card(full_screen = TRUE, fill = TRUE, uiOutput("table_tabs"))
         ),
         downloadButton("download", "Download as CSV")
     )
@@ -42,62 +42,15 @@ table_ui <- function(id) {
 #'
 #' @export
 #'
-# dataset_server <- function(id, df) {
-#     moduleServer(id, function(input, output, session) {
-#         
-#         filtered <- reactive({
-#             data <- df()
-#             
-#             # Fix tax
-#             tax_division_lookup <- list(
-#                 "PRO" = "Prokaryota",
-#                 "VRL" = "Virus",
-#                 "MAM" = "Mammalia",
-#                 "INV" = "Invertebrates",
-#                 "VRT" = "Vertebrates",
-#                 "PLN" = "Plantae",
-#                 "FUN" = "Fungi",
-#                 "HUM" = "Homo sapiens",
-#                 "ENV" = "Environment",
-#                 "ROD" = "Rodentia",
-#                 "MUS" = "Mus",
-#                 "PHG" = "Phage"
-#             )
-#             
-#             data$tax_division2 <- sapply(data$tax_division, function(x) {
-#                 if (x == "") "Unknown" else tax_division_lookup[[x]]
-#             })
-#             
-#             data$tax_division2 <- as.character(data$tax_division2)
-#             
-#             # Fix tags
-#             split_tags <- str_split(data$tag, "[:;]", simplify = TRUE)
-#             data$tag1 <- split_tags[, 1]
-#             data$tag2 <- split_tags[, 2]
-#             data$tag3 <- split_tags[, 3]
-#             data$tag4 <- split_tags[, 4]
-#             data$tag5 <- split_tags[, 5]
-#             
-#             # Lat/long
-#             split_location <- str_match(data$location, "([0-9.]+) N ([0-9.]+) E")
-#             data$lat <- as.numeric(split_location[, 2])
-#             data$long <- as.numeric(split_location[, 3])
-#             
-#             # Order
-#             data <- data[order(data$first_public, decreasing = TRUE), ]
-#             
-#             data
-#         })
-#         
-#         return(filtered)
-#     })
-# }
 dataset_server <- function(id, df) {
     moduleServer(id, function(input, output, session) {
         
         filtered <- reactive({
             data <- df()
-            
+
+            if (!"source" %in% names(data)) {
+                data$source <- NA_character_
+            }
             # If data is empty, return an empty data.table with expected columns
             if (nrow(data) == 0) {
                 empty_cols <- c(
@@ -107,7 +60,9 @@ dataset_server <- function(id, df) {
                     "tax_division", "tax_division2",
                     "tag", "tag1", "tag2", "tag3", "tag4", "tag5",
                     "location", "lat", "long",
-                    "decimalLatitude", "decimalLongitude", "year"
+                    "decimalLatitude", "decimalLongitude", "year", "source",
+                    "coords_fixed", "coords_fixed_country",
+                    "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
                 )
                 data <- data.table(matrix(ncol = length(empty_cols), nrow = 0))
                 setnames(data, empty_cols)
@@ -119,11 +74,26 @@ dataset_server <- function(id, df) {
                 "tax_division", "tag", "location", "first_public",
                 "host", "host_tax_id", "isolation_source",
                 "scientific_name", "tax_id", "topology",
-                "decimalLatitude", "decimalLongitude", "year"
+                "decimalLatitude", "decimalLongitude", "year", "source",
+                "basis_of_record", "phylum", "class", "order", "family", "genus", "species"
             )
             for (col in expected_cols) {
                 if (!col %in% names(data)) data[[col]] <- NA
             }
+            if (!"coords_fixed" %in% names(data)) {
+                data$coords_fixed <- FALSE
+            } else {
+                data$coords_fixed <- as.logical(data$coords_fixed)
+                data$coords_fixed[is.na(data$coords_fixed)] <- FALSE
+            }
+            if (!"coords_fixed_country" %in% names(data)) {
+                data$coords_fixed_country <- NA_character_
+            } else {
+                data$coords_fixed_country <- as.character(data$coords_fixed_country)
+            }
+
+            # Normalize source tagging (do not override assigned source)
+            data$source <- toupper(trimws(as.character(data$source)))
             
             # Fix tax divisions (ENA only, GBIF will be NA)
             tax_division_lookup <- list(
@@ -161,14 +131,38 @@ dataset_server <- function(id, df) {
             data$tag5 <- ifelse(ncol(split_tags) >= 5, split_tags[,5], NA)
             
             # Lat/long
-            if (!is.null(data$location) && any(!is.na(data$location))) {
-                split_location <- str_match(data$location, "([0-9.]+) N ([0-9.]+) E")
-                data$lat <- as.numeric(split_location[, 2])
-                data$long <- as.numeric(split_location[, 3])
-            } else {
-                data$lat <- data$decimalLatitude
-                data$long <- data$decimalLongitude
-            }
+            split_location <- str_match(data$location, "([0-9.]+) N ([0-9.]+) E")
+            data$lat <- as.numeric(split_location[, 2])
+            data$long <- as.numeric(split_location[, 3])
+            data$lat[is.na(data$lat)] <- data$decimalLatitude[is.na(data$lat)]
+            data$long[is.na(data$long)] <- data$decimalLongitude[is.na(data$long)]
+
+            # Mark records without original coordinates and place them at Greece center
+            missing_coords <- is.na(data$lat) | is.na(data$long)
+            data$coords_fixed <- missing_coords
+            data$coords_fixed_country <- NA_character_
+
+            fallback_country <- trimws(tolower(as.character(data$country)))
+            fallback_country[is.na(fallback_country)] <- ""
+
+            is_norway <- missing_coords & fallback_country == "norway"
+            is_greece <- missing_coords & fallback_country == "greece"
+            is_other <- missing_coords & !is_norway & !is_greece
+
+            # Norway center
+            data$lat[is_norway] <- 60.4720
+            data$long[is_norway] <- 8.4689
+            data$coords_fixed_country[is_norway] <- "Norway"
+
+            # Greece center
+            data$lat[is_greece] <- 39.0742
+            data$long[is_greece] <- 21.8243
+            data$coords_fixed_country[is_greece] <- "Greece"
+
+            # Default fallback remains Greece when country is missing/other
+            data$lat[is_other] <- 39.0742
+            data$long[is_other] <- 21.8243
+            data$coords_fixed_country[is_other] <- "Greece"
             
             # Order
             if ("first_public" %in% names(data) && any(!is.na(data$first_public))) {
@@ -236,107 +230,96 @@ dataset_server <- function(id, df) {
 #         
 #     })
 # }
-# table_server <- function(id, df) {
-#     moduleServer(id, function(input, output, session) {
-#         
-#         output$table <- renderReactable({
-#             
-#             dt <- df()
-#             
-#             # Columns you want
-#             desired_cols <- c(
-#                 "accession", "first_public", "country", "altitude",
-#                 "host", "host_tax_id", "isolation_source", "scientific_name",
-#                 "tax_id", "topology", "tax_division2", "tag1", "tag2", "tag3",
-#                 "keywords"
-#             )
-#             
-#             # Fill missing columns with NA
-#             for (col in desired_cols) {
-#                 if (!col %in% names(dt)) dt[, (col) := NA]
-#             }
-#             
-#             dt <- dt[, ..desired_cols]
-#             
-#             reactable(
-#                 dt,
-#                 columns = list(
-#                     accession = colDef(
-#                         cell = function(value) {
-#                             if (!is.na(value)) {
-#                                 url <- sprintf("https://www.ebi.ac.uk/ena/browser/view/%s", value)
-#                                 htmltools::tags$a(href = url, target = "_blank", as.character(value))
-#                             } else NA
-#                         }
-#                     )
-#                 ),
-#                 theme = reactableTheme(backgroundColor = "#F3F6FA"),
-#                 paginationType = "jump",
-#                 defaultPageSize = 15,
-#                 showPageSizeOptions = TRUE,
-#                 pageSizeOptions = c(15, 25, 50, 100),
-#                 onClick = "select",
-#                 rowStyle = list(cursor = "pointer")
-#             )
-#         })
-#     })
-# }
-table_server <- function(id, df) {
+table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL) {
+    source <- match.arg(source)
+
     moduleServer(id, function(input, output, session) {
-        
+
         renderReactable({
-            
+
             data <- df()
-            
-            if (nrow(data) == 0) return(NULL)
-            
-            # Columns for ENA and GBIF
+
+            if (!"source" %in% names(data)) {
+                data$source <- NA_character_
+            }
+
+            data$source <- toupper(trimws(as.character(data$source)))
+            data <- data[!is.na(data$source) & data$source == source, ]
+
+            if (nrow(data) == 0) {
+                return(
+                    reactable(
+                        data.frame(Message = paste0("No ", source, " records found for this query.")),
+                        sortable = FALSE,
+                        pagination = FALSE,
+                        filterable = FALSE
+                    )
+                )
+            }
+
             ena_cols <- c(
                 "accession", "first_public", "country", "altitude",
                 "host", "host_tax_id", "isolation_source",
                 "scientific_name", "tax_id", "topology",
-                "tax_division2", "tag1", "tag2", "tag3", "keywords"
+                "tax_division2", "tag1", "tag2", "keywords"
             )
-            
+
             gbif_cols <- c(
-                "accession", "scientific_name", "country", "first_public",
+                "accession", "scientific_name", "country", "first_public", "basis_of_record",
                 "decimalLatitude", "decimalLongitude",
                 "tax_division2", "phylum", "class", "order",
                 "family", "genus", "species"
             )
-            
-            if (all(data$source == "ENA")) {
+
+            if (source == "ENA") {
                 cols_to_show <- intersect(ena_cols, names(data))
-            } else if (all(data$source == "GBIF")) {
-                cols_to_show <- intersect(gbif_cols, names(data))
             } else {
-                # Mixed sources: show columns that exist
-                cols_to_show <- intersect(c(ena_cols, gbif_cols), names(data))
+                cols_to_show <- intersect(gbif_cols, names(data))
             }
-            
+
+            filterable_flag <- TRUE
+            group_by_cols <- NULL
+
+            if (!is.null(table_options)) {
+                opts <- table_options()
+                filterable_flag <- isTRUE(opts$table_filter)
+                selected_group_by <- opts$group_by
+                if (is.null(selected_group_by)) {
+                    selected_group_by <- character()
+                }
+                group_by_cols <- intersect(selected_group_by, cols_to_show)
+                if (length(group_by_cols) == 0) {
+                    group_by_cols <- NULL
+                }
+            }
+
+            accession_url <- if (source == "ENA") {
+                "https://www.ebi.ac.uk/ena/browser/view/%s"
+            } else {
+                "https://www.gbif.org/occurrence/%s"
+            }
+
             reactable(
                 data[, ..cols_to_show],
                 columns = list(
                     accession = colDef(
                         cell = function(value) {
-                            if (all(data$source == "ENA")) {
-                                url <- sprintf("https://www.ebi.ac.uk/ena/browser/view/%s", value)
-                            } else {
-                                url <- sprintf("https://www.gbif.org/occurrence/%s", value)
-                            }
+                            if (is.na(value) || value == "") return(NA_character_)
+                            url <- sprintf(accession_url, value)
                             htmltools::tags$a(href = url, target = "_blank", as.character(value))
                         }
                     )
                 ),
-                filterable = TRUE,
+                filterable = filterable_flag,
+                groupBy = group_by_cols,
                 paginationType = "jump",
                 defaultPageSize = 15,
                 showPageSizeOptions = TRUE,
                 pageSizeOptions = c(15, 25, 50, 100)
             )
-            
+
         })
-        
+
     })
 }
 
@@ -457,3 +440,15 @@ download_server <- function(id, df) {
         
     })
 }
+
+
+
+
+
+
+
+
+
+
+
+
