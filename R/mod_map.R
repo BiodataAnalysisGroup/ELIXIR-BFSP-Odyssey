@@ -129,7 +129,7 @@ map_server      <- function(id, df, area_bounds = NULL, selected_country = NULL)
                         lat1 = selected_bounds$south,
                         lng2 = selected_bounds$east,
                         lat2 = selected_bounds$north,
-                        group = "selected_area",
+                        group = "query_area",
                         color = "#C0392B",
                         weight = 2,
                         fillOpacity = 0.08
