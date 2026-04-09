@@ -19,10 +19,11 @@ source_ui <- function(id) {
 
     tagList(
         
-        radioButtons(
+        checkboxGroupInput(
             NS(id, "source_input"), 
-            "Input data source", 
-            choices = c("ENA", "GBIF")
+            "Input data sources", 
+            choices = c("ENA", "GBIF"),
+            selected = c("ENA", "GBIF")
         ),
         
         hr(),
@@ -43,6 +44,29 @@ source_ui <- function(id) {
             max =  Sys.Date()
         ),
         
+        conditionalPanel(
+            condition = sprintf(
+                "input['%s'] && input['%s'].indexOf('GBIF') > -1",
+                ns("source_input"),
+                ns("source_input")
+            ),
+            selectizeInput(
+                NS(id, "gbif_basis_of_record"),
+                "GBIF basisOfRecord",
+                choices = c(
+                    "MATERIAL_SAMPLE",
+                    "PRESERVED_SPECIMEN",
+                    "LIVING_SPECIMEN",
+                    "HUMAN_OBSERVATION",
+                    "MACHINE_OBSERVATION",
+                    "OBSERVATION",
+                    "MATERIAL_CITATION",
+                    "FOSSIL_SPECIMEN"
+                ),
+                selected = "MATERIAL_SAMPLE",
+                multiple = TRUE
+            )
+        ),
         actionButton(
             NS(id, "go"),
             "Load Data"
@@ -82,8 +106,7 @@ table_options_ui   <- function(id) {
                 "Tax_division"   = "tax_division2",
                 "Scientific_name" = "scientific_name",
                 "Tag1"            = "tag1",
-                "Tag2"            = "tag2",
-                "Tag3"            = "tag3"
+                "Tag2"            = "tag2"
             )
         )
     )

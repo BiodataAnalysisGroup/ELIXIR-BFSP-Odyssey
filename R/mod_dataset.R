@@ -15,17 +15,50 @@
 #'
 #' @export
 #'
-data_server <- function(id) {
+data_server <- function(id, area_bounds = NULL) {
     moduleServer(id, function(input, output, session) {
         
         fetch_data <- eventReactive(input$go, {
-            req(input$range)
+            req(input$range, input$source_input)
             
-            if (input$source_input == "ENA") {
-                fetch_ena_data(input$country, input$range)
-            } else {
-                fetch_gbif_data(input$country, input$range)
+            selected_sources <- input$source_input
+            source_results <- list()
+            selected_bounds <- NULL
+
+            if (!is.null(area_bounds)) {
+                selected_bounds <- area_bounds()
             }
+            
+            if ("ENA" %in% selected_sources) {
+                ena_data <- fetch_ena_data(input$country, input$range, area_bounds = selected_bounds)
+                if (nrow(ena_data) > 0) {
+                    ena_data[, source := "ENA"]
+                }
+                source_results <- c(source_results, list(ena_data))
+            }
+            
+            if ("GBIF" %in% selected_sources) {
+                gbif_basis <- input$gbif_basis_of_record
+                if (is.null(gbif_basis) || length(gbif_basis) == 0) {
+                    gbif_basis <- "MATERIAL_SAMPLE"
+                }
+                gbif_data <- fetch_gbif_data(
+                    input$country,
+                    input$range,
+                    gbif_basis,
+                    area_bounds = selected_bounds
+                )
+                if (nrow(gbif_data) > 0) {
+                    gbif_data[, source := "GBIF"]
+                }
+                source_results <- c(source_results, list(gbif_data))
+            }
+            
+            if (length(source_results) == 0) {
+                return(data.table())
+            }
+            
+            rbindlist(source_results, fill = TRUE, use.names = TRUE)
         })
         
         return(fetch_data)
