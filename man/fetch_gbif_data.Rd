@@ -4,18 +4,27 @@
 \alias{fetch_gbif_data}
 \title{Helper function: GBIF data retrieval}
 \usage{
-fetch_gbif_data(country, date_range)
+fetch_gbif_data(
+  country,
+  date_range,
+  basis_of_record = "MATERIAL_SAMPLE",
+  area_bounds = NULL
+)
 }
 \arguments{
 \item{country}{Character string specifying the country (e.g. "Greece", "Norway").}
 
 \item{date_range}{A Date vector of length 2 specifying start and end dates.}
+
+\item{basis_of_record}{Character vector of GBIF basisOfRecord values.}
+
+\item{area_bounds}{Optional list with \code{west}, \code{east}, \code{south}, and \code{north}.}
 }
 \value{
 A \code{data.table} containing GBIF occurrence data.
 }
 \description{
-Retrieves occurrence data from GBIF based on country and date range.
+Retrieves occurrence data from GBIF based on country, date range, and basisOfRecord.
 }
 \details{
 This function queries the GBIF API using the provided filters and returns
