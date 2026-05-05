@@ -6,6 +6,7 @@ Biodiversity in Greece and Norway.
 ## Installation
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey")
 ```
@@ -13,6 +14,7 @@ remotes::install_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey")
 ## Usage
 
 ``` r
+
 # library(Odyssey)
 Odyssey::run_odyssey()
 ```

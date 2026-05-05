@@ -81,18 +81,21 @@ git checkout -b your-feature-name
     dependencies:
 
 ``` r
+
 devtools::install_dev_deps()
 ```
 
 2.  Ensure that everything builds and passes checks cleanly
 
 ``` r
+
 devtools::check()
 ```
 
 3.  Implement your changes, and then run
 
 ``` r
+
 devtools::load_all()
 
 run_odyssey()
@@ -101,6 +104,7 @@ run_odyssey()
 4.  Again make sure that everything builds and passes checks cleanly
 
 ``` r
+
 devtools::check()
 ```
 

@@ -22,6 +22,7 @@ The app retrieves records from two open resources:
 You can install the app with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey")
 ```
@@ -31,6 +32,7 @@ remotes::install_github("BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey")
 Once installed, launch the app:
 
 ``` r
+
 # library(Odyssey)
 Odyssey::run_odyssey()
 ```
