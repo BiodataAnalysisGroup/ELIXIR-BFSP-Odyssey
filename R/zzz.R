@@ -46,9 +46,13 @@
         "family",
         "genus",
         "phylum",
+<<<<<<< HEAD
         "scientificName",
         "row_key",
         "source"
+=======
+        "scientificName"
+>>>>>>> 757516e53a3d1943146f507d669a5542b5b6a40b
     ))
 }
 
