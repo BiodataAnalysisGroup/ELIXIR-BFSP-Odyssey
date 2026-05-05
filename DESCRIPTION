@@ -16,6 +16,7 @@ Imports:
     echarts4r,
     htmltools,
     leaflet,
+    leaflet.extras,
     reactable,
     scales,
     shiny,
@@ -23,7 +24,6 @@ Imports:
     rgbif
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Depends: R (>= 4.1)
 Suggests: 
     knitr,
@@ -32,3 +32,4 @@ Suggests:
 Config/testthat/edition: 3
 URL: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/, https://natanast.github.io/ELIXIR-BFSP-Odyssey/
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0

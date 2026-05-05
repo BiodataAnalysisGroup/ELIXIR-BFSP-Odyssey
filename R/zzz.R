@@ -38,7 +38,15 @@
         "decimalLongitude",
         "species",
         "kingdom",
-        "..cols_to_show"
+        "..cols_to_show",
+        "N",
+        "basisOfRecord",
+        "coords_fixed",
+        "coords_fixed_country",
+        "family",
+        "genus",
+        "phylum",
+        "scientificName"
     ))
 }
 

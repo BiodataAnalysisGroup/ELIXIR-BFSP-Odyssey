@@ -114,7 +114,9 @@ app_server <- function(input, output, session) {
         if (is.null(data) || nrow(data) == 0 || !"coords_fixed" %in% names(data)) {
             return("")
         }
-        fixed_n <- sum(as.logical(data$coords_fixed), na.rm = TRUE)
+        fixed_flags <- as.logical(data[["coords_fixed"]])
+        fixed_flags[is.na(fixed_flags)] <- FALSE
+        fixed_n <- sum(fixed_flags)
         if (fixed_n == 0) {
             return("All points use original coordinates")
         }
@@ -122,14 +124,15 @@ app_server <- function(input, output, session) {
             return(paste0(fixed_n, " points have estimated coordinates"))
         }
 
-        fixed_data <- data[as.logical(coords_fixed) == TRUE, ]
+        fixed_data <- data[fixed_flags, ]
         if (nrow(fixed_data) == 0) {
             return("All points use original coordinates")
         }
 
-        by_country <- fixed_data[, .N, by = .(coords_fixed_country)]
-        by_country <- by_country[order(-N)]
-        parts <- paste0(by_country$N, " ", ifelse(is.na(by_country$coords_fixed_country) | by_country$coords_fixed_country == "", "Greece", by_country$coords_fixed_country))
+        country_vec <- as.character(fixed_data[["coords_fixed_country"]])
+        country_vec[is.na(country_vec) | country_vec == ""] <- "Greece"
+        by_country_tbl <- sort(table(country_vec), decreasing = TRUE)
+        parts <- paste0(as.integer(by_country_tbl), " ", names(by_country_tbl))
 
         paste0(fixed_n, " points have estimated coordinates (", paste(parts, collapse = ", "), ")")
     })

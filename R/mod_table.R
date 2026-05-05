@@ -188,6 +188,10 @@ dataset_server <- function(id, df) {
 #'
 #' @param id Character string for namespacing the module
 #' @param df A reactive \code{data.table} containing the sequence dataset.
+#' @param source Character string indicating which data source table to render:
+#'   \code{"ENA"} or \code{"GBIF"}.
+#' @param table_options Optional reactive expression returning shared table
+#'   options (filter toggle and grouping columns).
 #'
 #' @return A \code{reactable} table rendered in the UI.
 #'
