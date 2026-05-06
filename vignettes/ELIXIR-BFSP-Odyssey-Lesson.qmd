@@ -1,0 +1,13 @@
+---
+title: "Elixir BFSP Odyssey lesson"
+format: html
+vignette: >
+  %\VignetteIndexEntry{Odyssey-lesson}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Link
+
+- https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey-Lesson/
+

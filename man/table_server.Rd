@@ -4,12 +4,18 @@
 \alias{table_server}
 \title{Server Module: Table Tab - Table Rendering}
 \usage{
-table_server(id, df)
+table_server(id, df, source = c("ENA", "GBIF"), table_options = NULL)
 }
 \arguments{
 \item{id}{Character string for namespacing the module}
 
 \item{df}{A reactive \code{data.table} containing the sequence dataset.}
+
+\item{source}{Character string indicating which data source table to render:
+\code{"ENA"} or \code{"GBIF"}.}
+
+\item{table_options}{Optional reactive expression returning shared table
+options (filter toggle and grouping columns).}
 }
 \value{
 A \code{reactable} table rendered in the UI.

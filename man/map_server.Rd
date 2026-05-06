@@ -4,12 +4,18 @@
 \alias{map_server}
 \title{Server Module: Map tab}
 \usage{
-map_server(id, df)
+map_server(id, df, area_bounds = NULL, selected_country = NULL)
 }
 \arguments{
 \item{id}{Character string specifying the module namespace identifier.}
 
 \item{df}{A reactive \code{data.table} containing sequence records.}
+
+\item{area_bounds}{Optional reactive expression returning selected map bounds
+used to display the active query area overlay.}
+
+\item{selected_country}{Optional reactive expression with the selected country
+used to center the initial map view (e.g., Greece/Norway).}
 }
 \value{
 A \code{leaflet} map rendered in the UI.

@@ -4,10 +4,14 @@
 \alias{data_server}
 \title{Server Module: ENA Query}
 \usage{
-data_server(id)
+data_server(id, area_bounds = NULL)
 }
 \arguments{
 \item{id}{A character string used to specify the module namespace.}
+
+\item{area_bounds}{Optional reactive expression returning a list with
+\code{west}, \code{east}, \code{south}, and \code{north} map bounds used
+to pre-filter ENA/GBIF queries.}
 }
 \value{
 A reactive expression that returns a \code{data.table} of the downloaded data.

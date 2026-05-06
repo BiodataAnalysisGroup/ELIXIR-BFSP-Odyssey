@@ -2,8 +2,19 @@ Package: Odyssey
 Title: Interactive Data Discovery Tool for Exploring Biodiversity Data
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Nikos", "Pechlivanis", , "nikosp41@certh.gr", role = "cre"),
-    person("Natasa", "Anastasiadou", , "nanastasiadou@certh.gr", role = "aut")
+    person(given = "Nikos", family = "Pechlivanis", email = "npechlv@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0003-2502-612X")),
+    person(given = "Natasa", family = "Anastasiadou", email = "nanastasiadou@certh.gr", role = c("cre", "aut"), comment = c(ORCID = "0009-0003-2908-7656")),
+    person(given = "Fotis", family = "Psomopoulos", email = "fpsom@certh.gr", role = c("ctb"), comment = c(ORCID = "0000-0002-0222-4273")),
+    person(given = "Aristotelis", family = "Papageorgiou", email = "apapage@mbg.duth.gr", role = c("ctb"), comment = c(ORCID = "0000-0001-6657-7820")),
+    person(given = "Evangelos", family = "Pafilis", email = "pafilis@hcmr.gr", role = c("ctb"), comment = c(ORCID = "0000-0001-5079-0125")),
+    person(given = "Nefeli", family = "Venetsianou", role = c("ctb")),
+    person(given = "Alexios", family = "Loukas", role = c("ctb"), comment = c(ORCID = "0000-0001-8603-3767")),
+    person(given = "Margaritis", family = "Tsifintaris", role = c("ctb"), comment = c(ORCID = "0000-0001-8603-3767")),
+    person(given = "Helle", family = "Baalsrud", middle = "Tessand", role = c("ctb"), comment = c(ORCID = "0000-0002-4161-3247")),
+    person(given = "Lars", family = "Grønvold", role = c("ctb"), comment = c(ORCID = "0000-0001-5404-4285")),
+    person(given = "Gareth", family = "Benjamin", middle = "Gillard", role = c("ctb"), comment = c(ORCID = "0000-0001-9533-3227")),
+    person(given = "Thu-Hien", family = "To", role = c("ctb"), comment = c(ORCID = "0000-0003-2902-3655")),
+    person(given = "Arturo", family = "Vera-Ponce", role = c("ctb"), comment = c(ORCID = "0000-0003-4085-5700"))
      )
 Description: Odyssey is an interactive Shiny application designed as a data discovery tool 
              for exploring biodiversity.It provides dynamic visualizations, 
@@ -15,7 +26,9 @@ Imports:
     data.table,
     echarts4r,
     htmltools,
+    htmlwidgets,
     leaflet,
+    leaflet.extras,
     reactable,
     scales,
     shiny,
@@ -23,12 +36,15 @@ Imports:
     rgbif
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Depends: R (>= 4.1)
 Suggests: 
     knitr,
     rmarkdown,
+    quarto,
     testthat (>= 3.0.0)
+VignetteBuilder: 
+    quarto
 Config/testthat/edition: 3
 URL: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/, https://natanast.github.io/ELIXIR-BFSP-Odyssey/
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.0.0
