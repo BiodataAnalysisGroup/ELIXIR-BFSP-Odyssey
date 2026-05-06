@@ -7,7 +7,7 @@ pagination, and clickable accession links to the ENA browser.
 ## Usage
 
 ``` r
-table_server(id, df)
+table_server(id, df, source = c("ENA", "GBIF"), table_options = NULL)
 ```
 
 ## Arguments
@@ -19,6 +19,16 @@ table_server(id, df)
 - df:
 
   A reactive `data.table` containing the sequence dataset.
+
+- source:
+
+  Character string indicating which data source table to render: `"ENA"`
+  or `"GBIF"`.
+
+- table_options:
+
+  Optional reactive expression returning shared table options (filter
+  toggle and grouping columns).
 
 ## Value
 

@@ -6,7 +6,7 @@ on country and date range.
 ## Usage
 
 ``` r
-fetch_ena_data(country, date_range)
+fetch_ena_data(country, date_range, area_bounds = NULL)
 ```
 
 ## Arguments
@@ -18,6 +18,10 @@ fetch_ena_data(country, date_range)
 - date_range:
 
   A Date vector of length 2 specifying start and end dates.
+
+- area_bounds:
+
+  Optional list with `west`, `east`, `south`, and `north`.
 
 ## Value
 

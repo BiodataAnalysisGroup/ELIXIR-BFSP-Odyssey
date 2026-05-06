@@ -8,7 +8,7 @@ number, taxonomic division, and scientific name.
 ## Usage
 
 ``` r
-map_server(id, df)
+map_server(id, df, area_bounds = NULL, selected_country = NULL)
 ```
 
 ## Arguments
@@ -20,6 +20,16 @@ map_server(id, df)
 - df:
 
   A reactive `data.table` containing sequence records.
+
+- area_bounds:
+
+  Optional reactive expression returning selected map bounds used to
+  display the active query area overlay.
+
+- selected_country:
+
+  Optional reactive expression with the selected country used to center
+  the initial map view (e.g., Greece/Norway).
 
 ## Value
 

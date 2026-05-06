@@ -7,7 +7,7 @@ range.
 ## Usage
 
 ``` r
-data_server(id)
+data_server(id, area_bounds = NULL)
 ```
 
 ## Arguments
@@ -15,6 +15,11 @@ data_server(id)
 - id:
 
   A character string used to specify the module namespace.
+
+- area_bounds:
+
+  Optional reactive expression returning a list with `west`, `east`,
+  `south`, and `north` map bounds used to pre-filter ENA/GBIF queries.
 
 ## Value
 

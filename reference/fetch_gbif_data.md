@@ -1,11 +1,17 @@
 # Helper function: GBIF data retrieval
 
-Retrieves occurrence data from GBIF based on country and date range.
+Retrieves occurrence data from GBIF based on country, date range, and
+basisOfRecord.
 
 ## Usage
 
 ``` r
-fetch_gbif_data(country, date_range)
+fetch_gbif_data(
+  country,
+  date_range,
+  basis_of_record = "MATERIAL_SAMPLE",
+  area_bounds = NULL
+)
 ```
 
 ## Arguments
@@ -17,6 +23,14 @@ fetch_gbif_data(country, date_range)
 - date_range:
 
   A Date vector of length 2 specifying start and end dates.
+
+- basis_of_record:
+
+  Character vector of GBIF basisOfRecord values.
+
+- area_bounds:
+
+  Optional list with `west`, `east`, `south`, and `north`.
 
 ## Value
 
