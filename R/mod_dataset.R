@@ -5,6 +5,9 @@
 #' based on user input for country and date range.
 #'
 #' @param id A character string used to specify the module namespace.
+#' @param area_bounds Optional reactive expression returning a list with
+#'   \code{west}, \code{east}, \code{south}, and \code{north} map bounds used
+#'   to pre-filter ENA/GBIF queries.
 #' 
 #' @return A reactive expression that returns a \code{data.table} of the downloaded data.
 #'

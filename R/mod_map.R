@@ -53,6 +53,10 @@ map_ui <- function(id) {
 #' 
 #' @param id Character string specifying the module namespace identifier.
 #' @param df A reactive \code{data.table} containing sequence records. 
+#' @param area_bounds Optional reactive expression returning selected map bounds
+#'   used to display the active query area overlay.
+#' @param selected_country Optional reactive expression with the selected country
+#'   used to center the initial map view (e.g., Greece/Norway).
 #' 
 #' @return A \code{leaflet} map rendered in the UI.
 #'
@@ -129,7 +133,7 @@ map_server      <- function(id, df, area_bounds = NULL, selected_country = NULL)
                         lat1 = selected_bounds$south,
                         lng2 = selected_bounds$east,
                         lat2 = selected_bounds$north,
-                        group = "selected_area",
+                        group = "query_area",
                         color = "#C0392B",
                         weight = 2,
                         fillOpacity = 0.08
