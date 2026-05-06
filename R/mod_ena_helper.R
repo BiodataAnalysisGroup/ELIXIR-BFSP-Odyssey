@@ -54,6 +54,7 @@ fetch_ena_data <- function(country, date_range, area_bounds = NULL, scientific_n
                        "&query=", URLencode(full_query))
     
     data <- tryCatch(fread(full_url), error = function(e) data.table())
+
     if (nrow(data) > 0) data[, source := "ENA"]
     
     return(data)

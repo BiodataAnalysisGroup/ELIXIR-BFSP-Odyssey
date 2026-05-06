@@ -50,6 +50,14 @@ source_ui <- function(id) {
             value = "",
             placeholder = "e.g. Fagus"
         ),
+
+        selectizeInput(
+            NS(id, "kingdom_filter"),
+            "Kingdom (optional)",
+            choices = c("Plantae", "Fungi", "Animalia", "Prokaryota", "Viruses", "Environment"),
+            selected = NULL,
+            multiple = TRUE
+        ),
         
         conditionalPanel(
             condition = sprintf(

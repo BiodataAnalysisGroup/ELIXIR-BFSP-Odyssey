@@ -270,8 +270,9 @@ table_server <- function(id, df, source = c("ENA", "GBIF"), table_options = NULL
             ena_cols <- c(
                 "accession", "first_public", "country", "altitude",
                 "host", "host_tax_id", "isolation_source",
-                "scientific_name", "tax_id", "topology",
-                "tax_division2", "tag1", "tag2", "keywords"
+                "scientific_name", "tax_id",
+                "lat", "long",
+                "tax_division2", "tag1", "tag2"
             )
 
             gbif_cols <- c(
