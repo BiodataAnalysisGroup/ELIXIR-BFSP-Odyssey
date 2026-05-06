@@ -10,7 +10,8 @@ fetch_gbif_data(
   country,
   date_range,
   basis_of_record = "MATERIAL_SAMPLE",
-  area_bounds = NULL
+  area_bounds = NULL,
+  scientific_name = NULL
 )
 ```
 
@@ -31,6 +32,11 @@ fetch_gbif_data(
 - area_bounds:
 
   Optional list with `west`, `east`, `south`, and `north`.
+
+- scientific_name:
+
+  Optional scientific name filter. If `NULL` or empty, no scientific
+  name filter is applied.
 
 ## Value
 

@@ -48,7 +48,7 @@ based on country and date range.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_ena_data</span><span class="op">(</span><span class="va">country</span>, <span class="va">date_range</span>, area_bounds <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_ena_data</span><span class="op">(</span><span class="va">country</span>, <span class="va">date_range</span>, area_bounds <span class="op">=</span> <span class="cn">NULL</span>, scientific_name <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -65,6 +65,11 @@ based on country and date range.</p>
 
 <dt id="arg-area-bounds">area_bounds<a class="anchor" aria-label="anchor" href="#arg-area-bounds"></a></dt>
 <dd><p>Optional list with <code>west</code>, <code>east</code>, <code>south</code>, and <code>north</code>.</p></dd>
+
+
+<dt id="arg-scientific-name">scientific_name<a class="anchor" aria-label="anchor" href="#arg-scientific-name"></a></dt>
+<dd><p>Optional scientific name filter. If <code>NULL</code> or empty,
+no scientific name filter is applied.</p></dd>
 
 </dl></div>
     <div class="section level2">

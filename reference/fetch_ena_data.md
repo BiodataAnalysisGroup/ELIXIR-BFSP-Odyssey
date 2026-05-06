@@ -6,7 +6,7 @@ on country and date range.
 ## Usage
 
 ``` r
-fetch_ena_data(country, date_range, area_bounds = NULL)
+fetch_ena_data(country, date_range, area_bounds = NULL, scientific_name = NULL)
 ```
 
 ## Arguments
@@ -22,6 +22,11 @@ fetch_ena_data(country, date_range, area_bounds = NULL)
 - area_bounds:
 
   Optional list with `west`, `east`, `south`, and `north`.
+
+- scientific_name:
+
+  Optional scientific name filter. If `NULL` or empty, no scientific
+  name filter is applied.
 
 ## Value
 
