@@ -46,5 +46,4 @@ VignetteBuilder:
     quarto
 Config/testthat/edition: 3
 URL: https://biodataanalysisgroup.github.io/ELIXIR-BFSP-Odyssey/, https://natanast.github.io/ELIXIR-BFSP-Odyssey/
-VignetteBuilder: knitr
 Config/roxygen2/version: 8.0.0
