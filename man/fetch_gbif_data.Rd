@@ -8,7 +8,8 @@ fetch_gbif_data(
   country,
   date_range,
   basis_of_record = "MATERIAL_SAMPLE",
-  area_bounds = NULL
+  area_bounds = NULL,
+  scientific_name = NULL
 )
 }
 \arguments{
@@ -19,6 +20,9 @@ fetch_gbif_data(
 \item{basis_of_record}{Character vector of GBIF basisOfRecord values.}
 
 \item{area_bounds}{Optional list with \code{west}, \code{east}, \code{south}, and \code{north}.}
+
+\item{scientific_name}{Optional scientific name filter. If \code{NULL} or empty,
+no scientific name filter is applied.}
 }
 \value{
 A \code{data.table} containing GBIF occurrence data.

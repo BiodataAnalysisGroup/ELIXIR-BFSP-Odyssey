@@ -4,7 +4,7 @@
 \alias{fetch_ena_data}
 \title{Helper function: ENA data retrieval}
 \usage{
-fetch_ena_data(country, date_range, area_bounds = NULL)
+fetch_ena_data(country, date_range, area_bounds = NULL, scientific_name = NULL)
 }
 \arguments{
 \item{country}{Character string specifying the country.}
@@ -12,6 +12,9 @@ fetch_ena_data(country, date_range, area_bounds = NULL)
 \item{date_range}{A Date vector of length 2 specifying start and end dates.}
 
 \item{area_bounds}{Optional list with \code{west}, \code{east}, \code{south}, and \code{north}.}
+
+\item{scientific_name}{Optional scientific name filter. If \code{NULL} or empty,
+no scientific name filter is applied.}
 }
 \value{
 A \code{data.table} containing ENA sequence data.
