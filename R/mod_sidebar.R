@@ -43,6 +43,13 @@ source_ui <- function(id) {
             end = Sys.Date() - 330, 
             max =  Sys.Date()
         ),
+
+        textInput(
+            NS(id, "scientific_name"),
+            "Scientific name (optional)",
+            value = "",
+            placeholder = "e.g. Fagus"
+        ),
         
         conditionalPanel(
             condition = sprintf(

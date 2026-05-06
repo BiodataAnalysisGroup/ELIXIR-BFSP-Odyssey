@@ -31,9 +31,21 @@ data_server <- function(id, area_bounds = NULL) {
             if (!is.null(area_bounds)) {
                 selected_bounds <- area_bounds()
             }
+            sci_name_filter <- trimws(as.character(input$scientific_name))
+            if (is.na(sci_name_filter) || sci_name_filter == "") {
+                sci_name_filter <- NULL
+            }
             
             if ("ENA" %in% selected_sources) {
-                ena_data <- fetch_ena_data(input$country, input$range, area_bounds = selected_bounds)
+                ena_data <- fetch_ena_data(
+                    input$country,
+                    input$range,
+                    area_bounds = selected_bounds,
+                    scientific_name = NULL
+                )
+                if (!is.null(sci_name_filter) && nrow(ena_data) > 0 && "scientific_name" %in% names(ena_data)) {
+                    ena_data <- ena_data[grepl(sci_name_filter, as.character(scientific_name), ignore.case = TRUE, perl = TRUE)]
+                }
                 if (nrow(ena_data) > 0) {
                     ena_data[, source := "ENA"]
                 }
@@ -49,8 +61,12 @@ data_server <- function(id, area_bounds = NULL) {
                     input$country,
                     input$range,
                     gbif_basis,
-                    area_bounds = selected_bounds
+                    area_bounds = selected_bounds,
+                    scientific_name = NULL
                 )
+                if (!is.null(sci_name_filter) && nrow(gbif_data) > 0 && "scientific_name" %in% names(gbif_data)) {
+                    gbif_data <- gbif_data[grepl(sci_name_filter, as.character(scientific_name), ignore.case = TRUE, perl = TRUE)]
+                }
                 if (nrow(gbif_data) > 0) {
                     gbif_data[, source := "GBIF"]
                 }

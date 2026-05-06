@@ -7,6 +7,8 @@
 #' @param country Character string specifying the country.
 #' @param date_range A Date vector of length 2 specifying start and end dates.
 #' @param area_bounds Optional list with `west`, `east`, `south`, and `north`.
+#' @param scientific_name Optional scientific name filter. If \code{NULL} or empty,
+#'   no scientific name filter is applied.
 #'
 #' @return A \code{data.table} containing ENA sequence data.
 #'
@@ -15,7 +17,7 @@
 #' returns the results in tabular format suitable for downstream analysis.
 #'
 #' @export
-fetch_ena_data <- function(country, date_range, area_bounds = NULL) {
+fetch_ena_data <- function(country, date_range, area_bounds = NULL, scientific_name = NULL) {
     
     base_url <- "https://www.ebi.ac.uk/ena/portal/api/search"
     
@@ -29,6 +31,11 @@ fetch_ena_data <- function(country, date_range, area_bounds = NULL) {
                          '" AND first_public<="', date_range[2], '"')
 
     query_parts <- c(country_query, date_query)
+
+    if (!is.null(scientific_name) && nzchar(trimws(as.character(scientific_name)))) {
+        sci_query <- paste0('scientific_name="', trimws(as.character(scientific_name)), '"')
+        query_parts <- c(query_parts, sci_query)
+    }
 
     if (!is.null(area_bounds)) {
         geo_query <- sprintf(

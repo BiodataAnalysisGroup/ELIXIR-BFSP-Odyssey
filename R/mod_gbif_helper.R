@@ -7,6 +7,8 @@
 #' @param date_range A Date vector of length 2 specifying start and end dates.
 #' @param basis_of_record Character vector of GBIF basisOfRecord values.
 #' @param area_bounds Optional list with `west`, `east`, `south`, and `north`.
+#' @param scientific_name Optional scientific name filter. If \code{NULL} or empty,
+#'   no scientific name filter is applied.
 #'
 #' @return A \code{data.table} containing GBIF occurrence data.
 #'
@@ -17,7 +19,7 @@
 #' @export
 #' @importFrom rgbif occ_search
 #'
-fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE", area_bounds = NULL) {
+fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE", area_bounds = NULL, scientific_name = NULL) {
     
     country_code <- switch(country,
                            "Greece" = "GR",
@@ -35,6 +37,11 @@ fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAM
 
     basis_of_record <- unique(basis_of_record)
     geometry_wkt <- NULL
+    sci_name <- NULL
+
+    if (!is.null(scientific_name) && nzchar(trimws(as.character(scientific_name)))) {
+        sci_name <- trimws(as.character(scientific_name))
+    }
 
     if (!is.null(area_bounds)) {
         geometry_wkt <- sprintf(
@@ -51,6 +58,7 @@ fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAM
             occ_search(
                 country = country_code,
                 basisOfRecord = basis,
+                scientificName = sci_name,
                 eventDate = paste0(format(date_range[1], "%Y-%m-%d"), ",", format(date_range[2], "%Y-%m-%d")),
                 geometry = geometry_wkt,
                 limit = 100000
