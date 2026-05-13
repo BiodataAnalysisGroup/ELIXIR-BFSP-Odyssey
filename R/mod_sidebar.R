@@ -54,7 +54,17 @@ source_ui <- function(id) {
         selectizeInput(
             NS(id, "kingdom_filter"),
             "Kingdom (optional)",
-            choices = c("Plantae", "Fungi", "Animalia", "Prokaryota", "Viruses", "Environment"),
+            choices = c(
+                "Animalia",
+                "Invertebrates",
+                "Vertebrates",
+                "Mammalia",
+                "Plantae",
+                "Fungi",
+                "Prokaryota",
+                "Viruses",
+                "Environment"
+            ),
             selected = NULL,
             multiple = TRUE
         ),
