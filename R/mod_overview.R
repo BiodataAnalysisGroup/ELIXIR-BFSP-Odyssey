@@ -91,6 +91,7 @@ plot_server1    <- function(id, df) {
             #   summarize(Dates = n())
             
             data_p1 <- data_p1[, by = year_month, .(Dates = .N)]
+            data_p1 <- data_p1[order(year_month)]
             
             
             data_p1 |>

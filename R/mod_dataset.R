@@ -44,7 +44,6 @@ data_server <- function(id, area_bounds = NULL) {
                         kingdom_filter <- NULL
                     }
                 }
-
                 total_steps <- max(1, length(selected_sources)) + 1
                 step <- 0
 
@@ -94,6 +93,20 @@ data_server <- function(id, area_bounds = NULL) {
                     gbif_basis <- input$gbif_basis_of_record
                     if (is.null(gbif_basis) || length(gbif_basis) == 0) {
                         gbif_basis <- "MATERIAL_SAMPLE"
+                    }
+
+                    has_area <- !is.null(selected_bounds)
+                    has_sci <- !is.null(sci_name_filter)
+                    has_kingdom <- !is.null(kingdom_filter)
+                    long_range <- as.integer(input$range[2] - input$range[1]) > 180
+                    broad_query <- long_range && !has_area && !has_sci && !has_kingdom
+
+                    if (broad_query) {
+                        showNotification(
+                            "Broad GBIF query detected. Loading may be slow; add Scientific name, Kingdom, map area, or reduce date range for faster results.",
+                            type = "warning",
+                            duration = 8
+                        )
                     }
                     gbif_data <- fetch_gbif_data(
                         input$country,
