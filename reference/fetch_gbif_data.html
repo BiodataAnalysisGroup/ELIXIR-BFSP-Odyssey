@@ -50,7 +50,9 @@
 <span>  <span class="va">date_range</span>,</span>
 <span>  basis_of_record <span class="op">=</span> <span class="st">"MATERIAL_SAMPLE"</span>,</span>
 <span>  area_bounds <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scientific_name <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  scientific_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"auto"</span>, <span class="st">"search"</span>, <span class="st">"download"</span><span class="op">)</span>,</span>
+<span>  max_rows <span class="op">=</span> <span class="fl">30000</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -77,6 +79,17 @@
 <dt id="arg-scientific-name">scientific_name<a class="anchor" aria-label="anchor" href="#arg-scientific-name"></a></dt>
 <dd><p>Optional scientific name filter. If <code>NULL</code> or empty,
 no scientific name filter is applied.</p></dd>
+
+
+<dt id="arg-mode">mode<a class="anchor" aria-label="anchor" href="#arg-mode"></a></dt>
+<dd><p>GBIF retrieval mode: <code>"auto"</code>, <code>"search"</code>, or
+<code>"download"</code>. Auto uses <code>occ_download</code> for broad queries when
+credentials are available, otherwise falls back to <code>occ_search</code>.</p></dd>
+
+
+<dt id="arg-max-rows">max_rows<a class="anchor" aria-label="anchor" href="#arg-max-rows"></a></dt>
+<dd><p>Maximum number of GBIF rows to fetch/return when using
+<code>occ_search</code>. Set high by default for unrestricted loading.</p></dd>
 
 </dl></div>
     <div class="section level2">
