@@ -9,6 +9,3 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^vignettes/\.quarto$
-^doc$
-^Meta$
