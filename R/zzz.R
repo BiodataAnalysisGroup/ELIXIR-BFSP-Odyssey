@@ -53,5 +53,5 @@
 }
 
 .onAttach <- function(libname, pkgname) {
-    packageStartupMessage("Welcome to Odyssey!")
+    packageStartupMessage("Welcome to Odyssey! Keep on exploring...")
 }

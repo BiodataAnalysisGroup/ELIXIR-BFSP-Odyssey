@@ -1,6 +1,5 @@
-
-#' UI Module: Map Tab 
-#' 
+#' UI Module: Map Tab
+#'
 #' Defines the user interface for the Map tab of the Odyssey Shiny application.
 #' This tab displays an interactive Leaflet map that visualizes molecular biodiversity data.
 #'
@@ -10,10 +9,13 @@
 #'
 #' @export
 #'
+
+library(sf) #required for the handling and transform of user shape files
+
 map_ui <- function(id) {
-    
+
     ns <- NS(id)
-    
+
     nav_panel(
         title = tags$h6("Map", style = "color: #004164; margin-bottom: 10px; margin-top: 5px;"),
         fluidPage(
@@ -37,8 +39,6 @@ map_ui <- function(id) {
             )
         )
     )
-    
-
 }
 
 
@@ -46,18 +46,18 @@ map_ui <- function(id) {
 #' Server Module: Map tab
 #'
 #' Server logic for the Map tab of the Odyssey app.
-#' This module renders an interactive leaflet map displaying 
-#' sample collection locations. Points are clustered and popups 
-#' include sample metadata such as accession number, taxonomic 
+#' This module renders an interactive leaflet map displaying
+#' sample collection locations. Points are clustered and popups
+#' include sample metadata such as accession number, taxonomic
 #' division, and scientific name.
-#' 
+#'
 #' @param id Character string specifying the module namespace identifier.
-#' @param df A reactive \code{data.table} containing sequence records. 
+#' @param df A reactive \code{data.table} containing sequence records.
 #' @param area_bounds Optional reactive expression returning selected map bounds
 #'   used to display the active query area overlay.
 #' @param selected_country Optional reactive expression with the selected country
 #'   used to center the initial map view (e.g., Greece/Norway).
-#' 
+#'
 #' @return A \code{leaflet} map rendered in the UI.
 #'
 #' @export
@@ -111,11 +111,36 @@ map_server      <- function(id, df, area_bounds = NULL, selected_country = NULL)
                 view_lat <- 38.0000
                 view_zoom <- 6.5
             }
-
+            
             base_map <- leaflet() |>
-                addProviderTiles("CartoDB.Positron") |>
+              
+                ## add map layers, including base map, topography and satellite view
+                
+                # a minimalist, light-gray map basemap
+                #addProviderTiles("CartoDB.Positron", group = "Base Map") |> #2026.08.31- CartoDB now requires an API key via a free account creation
+                addTiles(group = "Base Map") |>                     #therefore the Base Map has been switched to the OpenStretMap one (i.e. the Leaflet's default, no API Key required)
+              
+                # high-quality topographic map, incl. Detailed Terrain: Displays elevation contour lines, hillshading, and accurate water bodies
+                addProviderTiles("OpenTopoMap", group = "Topography") |> 
+                
+              #a dynamic, high-resolution global map layer provided by Esri. It acts as a visual background, combining satellite and aerial photography to provide a near real-time, highly detailed picture of the Earth's landmasses for use in mapping and data analysis)
+                addProviderTiles("Esri.WorldImagery", group = "Satellite") |>
+                
+                
+              
+              
+                # Add a control panel to toggle layers on and off
+                addLayersControl(
+                  #baseGroups = c("Base Map", "Topographic Map", "Satellite Map"),
+                  baseGroups = MAP_BASE_GROUPS, #defined in globals.R
+                  overlayGroups = app_globals$user_custom_layers, #defined in globals.R
+                  options = layersControlOptions(collapsed = FALSE)
+                ) |>
+                
+                #set the initial map area
                 setView(view_lng, view_lat, zoom = view_zoom) |>
-                leaflet.extras::addDrawToolbar(
+              
+              leaflet.extras::addDrawToolbar(
                     targetGroup = "query_area",
                     polygonOptions = leaflet.extras::drawPolygonOptions(showArea = TRUE),
                     rectangleOptions = leaflet.extras::drawRectangleOptions(),
@@ -222,6 +247,6 @@ map_server      <- function(id, df, area_bounds = NULL, selected_country = NULL)
 
             base_map
         })
-        
+
     })
 }

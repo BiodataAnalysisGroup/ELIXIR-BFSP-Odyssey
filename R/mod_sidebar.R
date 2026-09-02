@@ -16,7 +16,7 @@ source_ui <- function(id) {
     ns <- NS(id)
     
     european_countries <- c("Greece", "Norway")
-
+    
     tagList(
         
         checkboxGroupInput(
@@ -96,12 +96,8 @@ source_ui <- function(id) {
             NS(id, "go"),
             "Load Data"
         ),
-        hr(),
-        
-        
-    )
-    
-    
+        hr()
+    )#end of tagList
 }
 
 
@@ -116,25 +112,62 @@ source_ui <- function(id) {
 #' @export
 #'
 table_options_ui   <- function(id) {
+  
+  ns <- NS(id)
+  
+  tagList(
     
-    ns <- NS(id)
+    h5("Table options", style = "color:#2b5769;"),
     
-    tagList(
-        
-        h5("Table options", style = "color:#2b5769;"),
-        
-        checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
-
-        checkboxGroupInput(
-            NS(id, "group_by"), "Group by", selected = NULL,
-            choices = c(
-                "Tax_division"   = "tax_division2",
-                "Scientific_name" = "scientific_name",
-                "Tag1"            = "tag1",
-                "Tag2"            = "tag2"
-            )
-        )
+    checkboxInput(NS(id, "table_filter"), "Show filter", FALSE),
+    
+    checkboxGroupInput(
+      NS(id, "group_by"), "Group by", selected = NULL,
+      choices = c(
+        "Tax_division"   = "tax_division2",
+        "Scientific_name" = "scientific_name"
+      )
+      
+      # choices = c(
+      #   "Tax_division"   = "tax_division2",
+      #   "Scientific_name" = "scientific_name",
+      #   "Tag1"            = "tag1",
+      #   "Tag2"            = "tag2"
+      # )
+      
     )
+  )#end of tag list
+}
+
+
+
+#' UI Module: Sidebar - User Map Layer Options
+#'
+#' This UI module displays the components allowing users to load a WMS layer or to upload a local shape filecheck as a layer on the Odyssey map.
+#'
+#' @param id Character string used for namespacing the input IDs in the UI module.
+#' 
+#' @return A \code{tagList} with UI elements for map layer customization.
+#'
+#' @export
+#'
+user_map_layer_sidebar_options_ui   <- function(id) {
+  
+  ns <- NS(id)
+  
+  tagList(
+    hr(),
+    h5("Add WMS Layer", style = "color:#2b5769;"),
+    textInput("wms_url", "1. WMS Base URL:", value = "https://gis.crete.gov.gr/geoserver/wms"),
+    textInput("wms_layer", "2. Layer Name / ID:", value = "gisvec:env_pol_habitats_18"),
+    textInput("wms_title", "3. Menu Display Title:", value = "Crete Natura 2000 sites"),
+    actionButton("add_wms_button", "Load WMS Layer"),# class = "btn-primary", style = "width: 100%;"),
     
-    
+    hr(),
+    h5("Upload Shapefile", style = "color:#2b5769;"),
+    fileInput("zip_file_load_button", "Upload Shapefile (.zip format)",
+              accept = c(".zip")),
+    helpText("Ensure your ZIP archive contains the mandatory .shp, .shx, .dbf, and .prj files in the root folder."),
+  )
+  
 }
