@@ -22,7 +22,7 @@ If you would like to contribute to this pipeline, please see the [Contribution G
 
 ## License
 
-This work, as a whole, is licensed under the [MIT license](https://github.com/npechl/MBioG/blob/main/LICENSE).
+This work, as a whole, is licensed under the [MIT license](http://github.com/BiodataAnalysisGroup/ELIXIR-BFSP-Odyssey/blob/main/LICENSE).
 
 The code contained in this website is simultaneously available under the MIT license; this means that you are free to use it in your own packages, as long as you cite the source.
 
