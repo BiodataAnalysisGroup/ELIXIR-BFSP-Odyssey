@@ -38,5 +38,7 @@ import(stringr)
 importFrom(htmltools,tags)
 importFrom(rgbif,occ_search)
 importFrom(scales,comma)
-importFrom(utils,URLencode)
-importFrom(utils,write.csv)
+importFrom(utils,
+  URLencode,
+  write.csv
+)
