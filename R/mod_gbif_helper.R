@@ -24,7 +24,14 @@
 #' @export
 #' @importFrom rgbif occ_search
 #'
-fetch_gbif_data <- function(country, date_range, basis_of_record = "MATERIAL_SAMPLE", area_bounds = NULL, scientific_name = NULL, mode = c("auto", "search", "download"), max_rows = 30000) {
+fetch_gbif_data <- function(
+        country, date_range, 
+        basis_of_record = "MATERIAL_SAMPLE", 
+        area_bounds = NULL, 
+        scientific_name = NULL, 
+        mode = c("auto", "search", "download"), 
+        max_rows = 30000) {
+    
     mode <- match.arg(mode)
     
     country_code <- switch(country,
